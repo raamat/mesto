@@ -1,0 +1,7 @@
+.element__photo {
+  display: block;
+  padding: 0;
+  margin: 0;
+  object-fit: cover;
+  max-width: 282px;
+}
