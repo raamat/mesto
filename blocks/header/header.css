@@ -1,4 +1,13 @@
 .header {
-  min-height: 119px;
+  margin-top: 45px;
+  padding-bottom: 41px;
+  height: 100%;
   border-bottom: 1px solid #545454;
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    margin-top: 28px;
+    padding-bottom: 32px;
+  }
 }

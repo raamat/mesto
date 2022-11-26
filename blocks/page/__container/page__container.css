@@ -2,3 +2,15 @@
   max-width: 880px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 768px) {
+  .page__container {
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page__container {
+    max-width: 282px;
+  }
+}

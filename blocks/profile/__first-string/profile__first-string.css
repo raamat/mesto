@@ -1,0 +1,6 @@
+.profile__first-string {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
