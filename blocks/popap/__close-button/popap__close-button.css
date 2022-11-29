@@ -1,0 +1,8 @@
+.popap__close-button {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background-image: url(/images/close-button.svg);
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
