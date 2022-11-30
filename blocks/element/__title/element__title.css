@@ -1,4 +1,7 @@
 .element__title {
   margin: 25px 21px 15px 31px;
   padding: 0;
+  /*Что-то нет то*/
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

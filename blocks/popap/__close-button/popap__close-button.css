@@ -2,7 +2,22 @@
   display: block;
   width: 32px;
   height: 32px;
+  background: rgba(0, 0, 0, 0);
   background-image: url(/images/close-button.svg);
   background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
   cursor: pointer;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+@media screen and (max-width: 320px) {
+  .popap__close-button {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
 }

@@ -1,9 +1,13 @@
 .form {
   max-width: 430px;
   width: 100%;
-  max-height: 330px;
-  height: 100%;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
+}
+
+@media screen and (max-width: 320px) {
+  .form {
+    max-width: 282px;
+  }
 }
