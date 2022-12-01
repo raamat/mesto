@@ -1,13 +1,36 @@
 .profile__info {
+  max-width: 550px;
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  border: 1px solid red;
+  margin-right: auto;
+  /*border: 1px solid red;*/
+}
+
+@media screen and (max-width: 900px) {
+  .profile__info {
+    max-width: 440px;   
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__info {
+    max-width: 400px;   
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile__info {
+    margin-top: 24px;
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .profile__info {
-    margin-top: 22px;
-    align-self: center;  
+    /*margin-left: 0;*/
+    /*max-width: 270px;*/
+    /*align-self: center; */ 
   }
 }
