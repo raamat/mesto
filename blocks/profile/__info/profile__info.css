@@ -4,7 +4,7 @@
   flex-direction: column;
   margin-left: 30px;
   margin-right: auto;
-  /*border: 1px solid red;*/
+  /*border: 1px solid rgb(47, 0, 255);*/
 }
 
 @media screen and (max-width: 900px) {
@@ -19,18 +19,18 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .profile__info {
-    margin-top: 24px;
-    width: 100%;
-    margin-left: 0;
+    margin: 28px 0 0;
+    text-align: center;
   }
 }
 
 @media screen and (max-width: 320px) {
   .profile__info {
     /*margin-left: 0;*/
-    /*max-width: 270px;*/
-    /*align-self: center; */ 
+    align--self: center;
+    margin--left: 20px;
+    margin-right: 0;
   }
 }
