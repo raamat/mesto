@@ -32,7 +32,7 @@
 @import url(/blocks/form/__title/form__title.css);
 @import url(/blocks/form/field/form__field.css);
 @import url(/blocks/form/__submit-button/form__submit-button.css);
-/******************************* mod *******************************/
+/******************************* modifiers *******************************/
 @import url(/blocks/popap/_opened/popap_opened.css);
 @import url(/blocks/form/field/_name/form__field_name.css);
 @import url(/blocks/form/field/_job/form__field_job.css);
