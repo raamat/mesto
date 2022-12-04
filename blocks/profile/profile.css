@@ -4,14 +4,12 @@
   margin: 40px 0;
   align-items: center;
   justify-content: space-between;
-  /*border: 1px solid red;*/
 }
 
 @media screen and (max-width: 600px) {
   .profile {
     flex-direction: column;
     margin-top: 38px;
-    flex--wrap: nowrap;
   }
 }
 
