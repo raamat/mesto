@@ -18,11 +18,11 @@
         <div class="profile__info">
           <div class="profile__first-string">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button opacity"></button>
+            <button class="profile__edit-button opacity" type="button"></button>
           </div>    
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile__add-button opacity"></button>
+        <button class="profile__add-button opacity" type="button"></button>
       </section>
       <section class="elements">
         <ul class="elements__list">
@@ -30,42 +30,42 @@
             <img class="element__photo" src="images/gora-elbrus.jpg" alt="Гора Эльбрус">
             <div class="element__caption">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <div class="element__like"></div>
+              <button class="element__like opacity" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__photo" src="images/dombay.jpg" alt="Домбай">
             <div class="element__caption">
               <h2 class="element__title">Домбай</h2>
-              <div class="element__like"></div>
+              <button class="element__like opacity" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__photo" src="images/kamchatka.jpg" alt="Камчатка">
             <div class="element__caption">
               <h2 class="element__title">Камчатка</h2>
-              <div class="element__like"></div>
+              <button class="element__like opacity" type="button"></button>
             </div> 
           </li> 
           <li class="element">
             <img class="element__photo" src="images/vershina-manaraga.jpg" alt="Вершина Манарага">
             <div class="element__caption">
               <h2 class="element__title">Вершина Манарага</h2>
-              <div class="element__like"></div>
+              <button class="element__like opacity" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__photo" src="images/altajskie-gory.jpg" alt="Алтайские горы">
             <div class="element__caption">
               <h2 class="element__title">Алтайские горы</h2>
-              <div class="element__like"></div>
+              <button class="element__like opacity" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__photo" src="images/karachaevsk.jpg" alt="Карачаево-Черкессия">
             <div class="element__caption">
               <h2 class="element__title">Карачаево-Черкессия</h2>
-              <div class="element__like"></div>
+              <button class="element__like opacity" type="button"></button>
             </div> 
           </li>  
         </ul>
@@ -75,15 +75,15 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer> 
   </div>
-  <div class="popap">
-    <div class="form">
-      <div class="form__container">
-        <h2 class="form__title">Редактировать профиль</h2>
-        <input type="text" placeholder="Имя" class="form__field form__field_name">
-        <input type="text" placeholder="Род деятельности" class="form__field form__field_job">
-        <button class="form__submit-button form__submit-button_opacity">Сохранить</button>
-      </div>
-      <button class="popap__close-button opacity"></button>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button opacity" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup_form" name="popup-form">
+          <input class="popup__field popup__field_type_name" type="text" placeholder="Имя" name="name">
+          <input class="popup__field popup__field_type_job" type="text" placeholder="Род деятельности" name="job">
+          <button class="popup__submit-button popup__submit-button_opacity" type="submit">Сохранить</button>
+        </form>
     </div>
   </div>
   <script src="scripts/index.js"></script>

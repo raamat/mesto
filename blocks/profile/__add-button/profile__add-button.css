@@ -8,6 +8,7 @@
   background-position: center;
   border: 2px solid #fff;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,49 +1,40 @@
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
-const profileAddButton = document.querySelector('.profile__add-button');
-const popap = document.querySelector('.popap');
-let formFieldName = document.querySelector('.form__field_name');
-let formFieldJob = document.querySelector('.form__field_job');
-const formSubmitButton = document.querySelector('.form__submit-button');
-const popapCloseButton = document.querySelector('.popap__close-button');
-let inputs = document.querySelectorAll('input');
+const popup = document.querySelector('.popup');
+let popupFieldName = document.querySelector('.popup__field_type_name');
+let popupFieldJob = document.querySelector('.popup__field_type_job');
+const popupCloseButton = document.querySelector('.popup__close-button');
+const popupForm = document.querySelector('.popup_form');
 
-/*Кнопка редактирования профиля - становится видимым модальное окно за счет добавления класса popap_opened*/
-profileEditButton.addEventListener('click', function() {
-  popap.classList.add('popap_opened');
-  formFieldName.value = profileTitle.textContent;
-  formFieldJob.value = profileSubtitle.textContent;
-})
-
-/*Кнопка закрытия модального окна*/
-popapCloseButton.addEventListener('click', function() {
-  popap.classList.remove('popap_opened');
-})
-
-/*Для улучшения юзабилити модальное окно закрывается шелчком на пустом месте*/
-popap.addEventListener('click', function(event) {
-  if (event.target === event.currentTarget) {
-    popap.classList.remove('popap_opened');  
-  }
-})
-
-/*Сохранение данных из формы происходит только в случае внесения изменений*/
-function saveForm() {
-  if (formFieldName.value !== profileTitle.textContent) {
-    profileTitle.textContent = formFieldName.value;
-  };
-  if (formFieldJob.value !== profileSubtitle.textContent) {
-    profileSubtitle.textContent = formFieldJob.value;
-  } 
+/*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
+function profileEdit(event) {
+  popup.classList.add('popup_opened');
+  popupFieldName.value = profileTitle.textContent;
+  popupFieldJob.value = profileSubtitle.textContent;
 }
 
-/*Обработчкик клика по кнопке "Сохранить"*/
-formSubmitButton.addEventListener('click', saveForm);
+/*Слушатель события клик по кнопке "Редактировать"*/
+profileEditButton.addEventListener('click', profileEdit);
 
-/*Обработчик нажатия Enter при открытом модальном окне*/
-popap.addEventListener('keyup', function(event) {
-  if (event.keyCode === 13) {
-    saveForm(); 
-  }
-})
+
+/*Функция закрытия модального окна*/
+function popupClose(event) {
+  popup.classList.remove('popup_opened');
+}
+
+/*Слушатель события клик по кнопке "Закрыть"*/
+popupCloseButton.addEventListener('click', popupClose);
+
+/*Сохранение данных из формы*/
+function saveForm(event) {
+  /*Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
+  мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
+  event.preventDefault();
+  profileTitle.textContent = popupFieldName.value;
+  profileSubtitle.textContent = popupFieldJob.value;
+  console.log(event);
+}
+
+/*Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit */
+popupForm.addEventListener('submit', saveForm);

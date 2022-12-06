@@ -1,0 +1,7 @@
+.popup__submit-button_opacity {
+  transition: opacity .3s;
+}
+
+.popup__submit-button_opacity:hover {
+  opacity: .8;
+}
