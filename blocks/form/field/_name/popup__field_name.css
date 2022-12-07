@@ -1,9 +1,0 @@
-.popup__field_type_name {
-  margin-top: 54px;
-}
-
-@media screen and (max-width: 320px) {
-  .popup__field_type_name {
-    margin-top: 75px;  
-  }
-}

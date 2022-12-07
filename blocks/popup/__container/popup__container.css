@@ -1,26 +1,29 @@
 .popup__container {
   display: flex;
   flex-direction: column;
-  margin: 34px 36px 37px;
-}
-
-@media screen and (max-width: 320px) {
-  .popup__container {
-    margin: 25px 22px;
-  }
-}
-
-/*Все что было в .form*/
-.popup__container {
+  box-sizing: border-box;
+  padding: 34px 36px 0;
   max-width: 430px;
   width: 100%;
+  max-height: 330px;
+  height: 100%;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .15);
+}
+
+@media screen and (max-width: 480px) {
+  .popup__container {
+    margin: 0 20px;
+
+  }
 }
 
 @media screen and (max-width: 320px) {
   .popup__container {
+    margin: 0;
+    padding: 34px 22px 0;
     max-width: 282px;
   }
 }
