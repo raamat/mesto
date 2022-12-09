@@ -5,7 +5,7 @@ const popup = document.querySelector('.popup');
 let popupFieldName = document.querySelector('.popup__field_type_name');
 let popupFieldJob = document.querySelector('.popup__field_type_job');
 const popupCloseButton = document.querySelector('.popup__close-button');
-const popupForm = document.querySelector('.popup_form');
+const popupForm = document.querySelector('.popup__form');
 
 /*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
 function profileEdit(event) {
@@ -14,17 +14,10 @@ function profileEdit(event) {
   popupFieldJob.value = profileSubtitle.textContent;
 }
 
-/*Слушатель события клик по кнопке "Редактировать"*/
-profileEditButton.addEventListener('click', profileEdit);
-
-
 /*Функция закрытия модального окна*/
 function popupClose(event) {
   popup.classList.remove('popup_opened');
 }
-
-/*Слушатель события клик по кнопке "Закрыть"*/
-popupCloseButton.addEventListener('click', popupClose);
 
 /*Сохранение данных из формы*/
 function saveForm(event) {
@@ -33,8 +26,14 @@ function saveForm(event) {
   event.preventDefault();
   profileTitle.textContent = popupFieldName.value;
   profileSubtitle.textContent = popupFieldJob.value;
-  console.log(event);
+  popupClose();
 }
 
 /*Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit */
 popupForm.addEventListener('submit', saveForm);
+
+/*Слушатель события клик по кнопке "Редактировать"*/
+profileEditButton.addEventListener('click', profileEdit);
+
+/*Слушатель события клик по кнопке "Закрыть"*/
+popupCloseButton.addEventListener('click', popupClose);
