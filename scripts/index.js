@@ -39,14 +39,14 @@ profileEditButton.addEventListener('click', profileEdit);
 popupCloseButton.addEventListener('click', popupClose);
 
 /***************************************************************************** ПР-5 ******************************************************************************/
-// <img class="element__photo" src="images/gora-elbrus.jpg" alt="Гора Эльбрус">
-// <h2 class="element__title">Гора Эльбрус</h2>
+// <img class="card__photo" src="images/gora-elbrus.jpg" alt="Гора Эльбрус">
+// <h2 class="card__title">Гора Эльбрус</h2>
 /*При загрузке на странице должно быть 6 карточек, которые добавит JavaScrip из массива initialCards*/
 /*
 const cardsList = document.querySelector('.cards__list');
-const elementTitle = document.querySelector('.element__title');
-const elementPhoto = document.querySelector('.element__photo');
-const elementTemplate = document.querySelector('.element-template').content;
+const cardTitle = document.querySelector('.card__title');
+const cardPhoto = document.querySelector('.card__photo');
+const cardTemplate = document.querySelector('.card-template').content;
 const images = [
   {
     name: 'Архыз',
@@ -78,8 +78,8 @@ const images = [
 images.forEach(function(element) {
   const imageElement = elementTemplate.cloneNode(true);
 
-  imageElement.querySelector('.element__photo').textContent = element.link;
-  imageElement.querySelector('.element__title').textContent = element.name;
+  imageElement.querySelector('.card__photo').textContent = card.link;
+  imagecard.querySelector('.card__title').textContent = card.name;
 
   elementsList.append(imageElement);
 })
