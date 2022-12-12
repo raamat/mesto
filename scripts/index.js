@@ -43,7 +43,7 @@ popupCloseButton.addEventListener('click', popupClose);
 // <h2 class="element__title">Гора Эльбрус</h2>
 /*При загрузке на странице должно быть 6 карточек, которые добавит JavaScrip из массива initialCards*/
 /*
-const elementsList = document.querySelector('.elements__list');
+const cardsList = document.querySelector('.cards__list');
 const elementTitle = document.querySelector('.element__title');
 const elementPhoto = document.querySelector('.element__photo');
 const elementTemplate = document.querySelector('.element-template').content;
