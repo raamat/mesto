@@ -2,6 +2,7 @@
 
 ## Описание проекта и его функциональности
 * Проект сверстан на основе [макета в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212%3A155&t=uwC59s8wZ2LfAiAA-0).
+* [Макет формы добавления карточек](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1&t=vLwJlPGRre86ZWky-0).
 * Картинки [оптимизированы](https://tinypng.com/), чтобы сайт загружался быстрее.
 * Проект адаптирован под различные устройства при помощи медиазапросов.
 * Используются семантические теги: main, h, p, ul, section, header, footer.

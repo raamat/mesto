@@ -1,5 +1,6 @@
 .card {
   display: block;
+  position: relative;
   background-color: #fff;
   overflow: hidden;
   max-width: 282px;

@@ -73,7 +73,7 @@ const initialCards = [
   }
 ];
 
-//Функция добавления подписи к картинкам
+//Функция добавления картинок с подписями
 initialCards.forEach(function(element) {
   // Клонируем содержимое тега <template> https://doka.guide/html/template/
   const initialCardsElement = cardTemplate.cloneNode(true);
