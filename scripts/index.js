@@ -42,12 +42,11 @@ popupCloseButton.addEventListener('click', popupClose);
 // <img class="card__photo" src="images/gora-elbrus.jpg" alt="Гора Эльбрус">
 // <h2 class="card__title">Гора Эльбрус</h2>
 /*При загрузке на странице должно быть 6 карточек, которые добавит JavaScrip из массива initialCards*/
-/*
 const cardsList = document.querySelector('.cards__list');
 const cardTitle = document.querySelector('.card__title');
 const cardPhoto = document.querySelector('.card__photo');
 const cardTemplate = document.querySelector('.card-template').content;
-const images = [
+const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -75,12 +74,15 @@ const images = [
 ];
 
 //Функция добавления подписи к картинкам
-images.forEach(function(element) {
-  const imageElement = elementTemplate.cloneNode(true);
+initialCards.forEach(function(element) {
+  // Клонируем содержимое тега <template> https://doka.guide/html/template/
+  const initialCardsElement = cardTemplate.cloneNode(true);
 
-  imageElement.querySelector('.card__photo').textContent = card.link;
-  imagecard.querySelector('.card__title').textContent = card.name;
+  initialCardsElement.querySelector('.card__photo').src = element.link;
+  initialCardsElement.querySelector('.card__photo').alt = element.name;
+  initialCardsElement.querySelector('.card__title').textContent = element.name;
+  
 
-  elementsList.append(imageElement);
+  // Вставляем склонированный контент в конец списка "cards__list"
+  cardsList.append(initialCardsElement);
 })
-*/
