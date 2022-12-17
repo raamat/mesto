@@ -6,10 +6,12 @@ let popupFieldName = document.querySelector('.popup__field_type_name');
 let popupFieldJob = document.querySelector('.popup__field_type_job');
 const popupCloseButton = document.querySelector('.popup__close-button');
 const popupForm = document.querySelector('.popup__form');
+const popupEditProfile =document.querySelector('.popup_type_edit-profile');
+
 
 /*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
 function profileEdit(event) {
-  popup.classList.add('popup_opened');
+  popupEditProfile.classList.add('popup_opened');
   popupFieldName.value = profileTitle.textContent;
   popupFieldJob.value = profileSubtitle.textContent;
 }
@@ -38,14 +40,7 @@ profileEditButton.addEventListener('click', profileEdit);
 /*Слушатель события клик по кнопке "Закрыть"*/
 popupCloseButton.addEventListener('click', popupClose);
 
-/***************************************************************************** ПР-5 ******************************************************************************/
-// <img class="card__photo" src="images/gora-elbrus.jpg" alt="Гора Эльбрус">
-// <h2 class="card__title">Гора Эльбрус</h2>
 /*При загрузке на странице должно быть 6 карточек, которые добавит JavaScrip из массива initialCards*/
-const cardsList = document.querySelector('.cards__list');
-const cardTitle = document.querySelector('.card__title');
-const cardPhoto = document.querySelector('.card__photo');
-const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
   {
     name: 'Архыз',
@@ -73,16 +68,54 @@ const initialCards = [
   }
 ];
 
-//Функция добавления картинок с подписями
+
+
+/******************************По Буртылеву***********************/
+//Переменный для карточек
+const cardsList = document.querySelector('.cards__list');
+const card = document.querySelector('.card');
+//const cardTitle = document.querySelector('.card__title');
+//const cardPhoto = document.querySelector('.card__photo');
+const profileAddButton = document.querySelector('.profile__add-button');
+const popapAddCard = document.querySelector('.popup_type_add-card');
+//const cardDeleteButton = document.querySelector('.card__delete-button');
+let popupFieldPlace = document.querySelector('.popup__field_type_place');
+let popupFieldLink = document.querySelector('.popup__field_type_link');
+
+/*Функция создания карточки*/
+function createCard(popupFieldPlace, popupFieldLink) {
+  const cardTemplate = document.querySelector('#card-template').content;
+  //Получаем содержимое контейнера li - "лишки", класс card
+  const cardTemplateClone = cardTemplate.querySelector('.card').cloneNode(true);
+  cardTemplateClone.querySelector('.card__title').textContent = popupFieldPlace; 
+  cardTemplateClone.querySelector('.card__photo').src = popupFieldLink;
+  cardTemplateClone.querySelector('.card__photo').alt = popupFieldPlace;
+
+  console.log(cardTemplate);
+
+  //Удаление карточки
+  cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
+    cardTemplateClone.remove();
+});
+
+  return cardTemplateClone;
+}
+
+/*Добавление 6 картинок с подписями, для этого запускаем цикл по массиву initialCards*/
 initialCards.forEach(function(element) {
-  // Клонируем содержимое тега <template> https://doka.guide/html/template/
-  const initialCardsElement = cardTemplate.cloneNode(true);
-
-  initialCardsElement.querySelector('.card__photo').src = element.link;
-  initialCardsElement.querySelector('.card__photo').alt = element.name;
-  initialCardsElement.querySelector('.card__title').textContent = element.name;
-  
-
-  // Вставляем склонированный контент в конец списка "cards__list"
-  cardsList.append(initialCardsElement);
+  cardsList.append(createCard(element.name, element.link));
 })
+
+/*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
+function profileAdd(event) {
+  popapAddCard.classList.add('popup_opened');
+}
+
+/*Функция добавления одной карточки*/
+//cardsList.prepend(createCard())
+
+/*Слушатель события клик по кнопке "Добавить"*/
+profileAddButton.addEventListener('click', profileAdd);
+
+//cardsList.append(createCard('Волгоград', 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/271236188.jpg?k=a3cfd8a4de3c0cc8eb91d1c979f16bb6156c97c9df4b0c719a8c2c3d09fd7b64&o='))
+
