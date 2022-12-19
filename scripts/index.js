@@ -1,13 +1,14 @@
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+//Все модальные окна в одной переменной popup
+const popup = document.querySelectorAll('.popup');
 let popupFieldName = document.querySelector('.popup__field_type_name');
 let popupFieldJob = document.querySelector('.popup__field_type_job');
-const popupCloseButton = document.querySelector('.popup__close-button');
+//Все кнопки закрытия модальных окон в одной переменной popupCloseButton
+const popupCloseButton = document.querySelectorAll('.popup__close-button');
 const popupForm = document.querySelector('.popup__form');
 const popupEditProfile =document.querySelector('.popup_type_edit-profile');
-
 
 /*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
 function profileEdit(event) {
@@ -18,7 +19,11 @@ function profileEdit(event) {
 
 /*Функция закрытия модального окна*/
 function popupClose(event) {
-  popup.classList.remove('popup_opened');
+  //popup.classList.remove('popup_opened');
+  popup.forEach(function(element) {
+    element.classList.remove('popup_opened');
+    console.log(element);
+  })
 }
 
 /*Сохранение данных из формы*/
@@ -38,7 +43,9 @@ popupForm.addEventListener('submit', saveForm);
 profileEditButton.addEventListener('click', profileEdit);
 
 /*Слушатель события клик по кнопке "Закрыть"*/
-popupCloseButton.addEventListener('click', popupClose);
+popupCloseButton.forEach((element) => {
+  element.addEventListener('click', popupClose);
+})  
 
 /*При загрузке на странице должно быть 6 карточек, которые добавит JavaScrip из массива initialCards*/
 const initialCards = [
@@ -77,7 +84,7 @@ const card = document.querySelector('.card');
 //const cardTitle = document.querySelector('.card__title');
 //const cardPhoto = document.querySelector('.card__photo');
 const profileAddButton = document.querySelector('.profile__add-button');
-const popapAddCard = document.querySelector('.popup_type_add-card');
+const popupAddCard = document.querySelector('.popup_type_add-card');
 //const cardDeleteButton = document.querySelector('.card__delete-button');
 let popupFieldPlace = document.querySelector('.popup__field_type_place');
 let popupFieldLink = document.querySelector('.popup__field_type_link');
@@ -91,9 +98,9 @@ function createCard(popupFieldPlace, popupFieldLink) {
   cardTemplateClone.querySelector('.card__photo').src = popupFieldLink;
   cardTemplateClone.querySelector('.card__photo').alt = popupFieldPlace;
 
-  console.log(cardTemplate);
+  //console.log(cardTemplate);
 
-  //Удаление карточки
+   //Удаление карточки
   cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
     cardTemplateClone.remove();
 });
@@ -106,16 +113,16 @@ initialCards.forEach(function(element) {
   cardsList.append(createCard(element.name, element.link));
 })
 
-/*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
-function profileAdd(event) {
-  popapAddCard.classList.add('popup_opened');
+/*Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened*/
+function cardFormOpened(event) {
+  popupAddCard.classList.add('popup_opened');
 }
 
 /*Функция добавления одной карточки*/
 //cardsList.prepend(createCard())
 
 /*Слушатель события клик по кнопке "Добавить"*/
-profileAddButton.addEventListener('click', profileAdd);
+profileAddButton.addEventListener('click', cardFormOpened);
 
-//cardsList.append(createCard('Волгоград', 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/271236188.jpg?k=a3cfd8a4de3c0cc8eb91d1c979f16bb6156c97c9df4b0c719a8c2c3d09fd7b64&o='))
+cardsList.prepend(createCard('Волгоград', 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/271236188.jpg?k=a3cfd8a4de3c0cc8eb91d1c979f16bb6156c97c9df4b0c719a8c2c3d09fd7b64&o='))
 
