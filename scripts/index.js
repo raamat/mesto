@@ -88,6 +88,15 @@ const popupAddCard = document.querySelector('.popup_type_add-card');
 //const cardDeleteButton = document.querySelector('.card__delete-button');
 let popupFieldPlace = document.querySelector('.popup__field_type_place');
 let popupFieldLink = document.querySelector('.popup__field_type_link');
+const popupCreateButton = document.querySelector('.popup__submit-button_type_create-card');
+const popupFormAddCard = document.querySelector('.popup__form_type_add-card');
+
+//Выношу ниже как глобальные для функции cardAdd
+const cardTemplate = document.querySelector('#card-template').content;
+//Получаем содержимое контейнера li - "лишки", класс card
+const cardTemplateClone = cardTemplate.querySelector('.card').cloneNode(true);
+
+
 
 /*Функция создания карточки*/
 function createCard(popupFieldPlace, popupFieldLink) {
@@ -118,11 +127,23 @@ function cardFormOpened(event) {
   popupAddCard.classList.add('popup_opened');
 }
 
-/*Функция добавления одной карточки*/
-//cardsList.prepend(createCard())
-
 /*Слушатель события клик по кнопке "Добавить"*/
 profileAddButton.addEventListener('click', cardFormOpened);
 
-cardsList.prepend(createCard('Волгоград', 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/271236188.jpg?k=a3cfd8a4de3c0cc8eb91d1c979f16bb6156c97c9df4b0c719a8c2c3d09fd7b64&o='))
+/*Функция добавления одной карточки*/
+function cardAdd(event) {
+  console.log('Прошел клик по кнопке Создать');
+  event.preventDefault();
+  popupFieldPlace = document.querySelector('.popup__field_type_place').value;
+  popupFieldLink = document.querySelector('.popup__field_type_link').value;
+  
+  cardsList.prepend(createCard(popupFieldPlace, popupFieldLink));
+  popupClose();
+}
+
+//Слушатель события по кнопке "Создать" карточку
+popupFormAddCard.addEventListener('submit', cardAdd);
+
+
+//cardsList.prepend(createCard('Волгоград', 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/271236188.jpg?k=a3cfd8a4de3c0cc8eb91d1c979f16bb6156c97c9df4b0c719a8c2c3d09fd7b64&o='))
 

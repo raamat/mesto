@@ -37,3 +37,24 @@ cloneCardTemplate.querySelector('.card__like-button').addEventListener('click', 
 
 /*Слушатель события клик по кнопке "Добавить"*/
 profileAddButton.addEventListener('click', profileAdd);
+
+
+/*Сохранение данных из формы - копия*/
+function saveForm(event) {
+  /*Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
+  мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
+  event.preventDefault();
+  profileTitle.textContent = popupFieldName.value;
+  profileSubtitle.textContent = popupFieldJob.value;
+  popupClose();
+}
+
+/*Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit */
+popupForm.addEventListener('submit', saveForm);
+
+/*Функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened*/
+function profileEdit(event) {
+  popupEditProfile.classList.add('popup_opened');
+  popupFieldName.value = profileTitle.textContent;
+  popupFieldJob.value = profileSubtitle.textContent;
+}
