@@ -107,12 +107,15 @@ function createCard(popupFieldPlace, popupFieldLink) {
   cardTemplateClone.querySelector('.card__photo').src = popupFieldLink;
   cardTemplateClone.querySelector('.card__photo').alt = popupFieldPlace;
 
-  //console.log(cardTemplate);
-
    //Удаление карточки
   cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
     cardTemplateClone.remove();
 });
+
+  //Лайки
+  cardTemplateClone.querySelector('.card__like-button').addEventListener('click', (event) => {
+    event.target.classList.toggle('card__like-button_active');
+  })
 
   return cardTemplateClone;
 }
@@ -145,5 +148,13 @@ function cardAdd(event) {
 popupFormAddCard.addEventListener('submit', cardAdd);
 
 
-//cardsList.prepend(createCard('Волгоград', 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/271236188.jpg?k=a3cfd8a4de3c0cc8eb91d1c979f16bb6156c97c9df4b0c719a8c2c3d09fd7b64&o='))
+//Функция увеличений картинки
+function zoomPhoto(event) {
+  document.querySelector('.popup_type_zoom-photo').classList.add('popup_opened');
+  document.querySelector('.popup__photo').src = document.querySelector('.card__photo').src;
+  document.querySelector('.popup__photo-caption').textContent = document.querySelector('.card__caption').textContent;
+  console.log(event);
+}
 
+//Слушатель увеличения картинки
+document.querySelector('.card__photo').addEventListener('click', zoomPhoto);
