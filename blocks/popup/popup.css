@@ -11,5 +11,6 @@
   visibility: hidden;
   opacity: 0;
   z-index: -1;
-  transition: opacity 1s, visibylity 0s 1s, z-index 0s 1s;
+  /*transition: opacity 1s, visibylity 0s 1s, z-index 0s 1s;*/
+  transition: all 0.7s ease 0s;
 }
