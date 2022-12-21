@@ -69,7 +69,6 @@ function popupClose(event) {
   //popup.classList.remove('popup_opened');
   popup.forEach(function(element) {
     element.classList.remove('popup_opened');
-    console.log(element);
   })
 }
 

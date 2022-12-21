@@ -8,3 +8,9 @@
   height: 282px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .card__photo {
+    width: 282px;
+  }
+}
