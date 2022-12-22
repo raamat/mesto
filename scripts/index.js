@@ -1,6 +1,6 @@
 /********************************************* Переменные профиля и модальных окон *********************************/
 
-let profileTitle = document.querySelector('.profile__title');
+const profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
 
@@ -17,34 +17,7 @@ const popupEditProfile =document.querySelector('.popup_type_edit-profile');
 
 /********************************************* Переменные для карточек *********************************************/
 
-//При загрузке на странице должно быть 6 карточек, которые добавит JavaScript из массива initialCards
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
+const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 const card = document.querySelector('.card');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -53,6 +26,10 @@ let popupFieldPlace = document.querySelector('.popup__field_type_place');
 let popupFieldLink = document.querySelector('.popup__field_type_link');
 const popupCreateButton = document.querySelector('.popup__submit-button_type_create-card');
 const popupFormAddCard = document.querySelector('.popup__form_type_add-card');
+
+popupTypeZoomPhoto = document.querySelector('.popup_type_zoom-photo');
+popupPhoto = document.querySelector('.popup__photo');
+popupPhotoCaption = document.querySelector('.popup__photo-caption');
 
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
@@ -86,12 +63,12 @@ function saveForm(event) {
 
 //Функция создания карточки
 function createCard(popupFieldPlace, popupFieldLink) {
-  const cardTemplate = document.querySelector('#card-template').content;
-  //Получаем содержимое контейнера li - "лишки", класс card
+  //Ниже получаем содержимое контейнера li - "лишки", класс card
   const cardTemplateClone = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardPhoto = cardTemplateClone.querySelector('.card__photo');
   cardTemplateClone.querySelector('.card__title').textContent = popupFieldPlace; 
-  cardTemplateClone.querySelector('.card__photo').src = popupFieldLink;
-  cardTemplateClone.querySelector('.card__photo').alt = popupFieldPlace;
+  cardPhoto.src = popupFieldLink;
+  cardPhoto.alt = popupFieldPlace;
 
    //Удаление карточки
   cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
@@ -124,18 +101,25 @@ function cardFormOpened(event) {
 //Функция добавления одной карточки
 function cardAdd(event) {
   event.preventDefault();
-  popupFieldPlace = document.querySelector('.popup__field_type_place').value;
-  popupFieldLink = document.querySelector('.popup__field_type_link').value;
   
-  cardsList.prepend(createCard(popupFieldPlace, popupFieldLink));
+  const placeName = popupFieldPlace.value;
+  const placeLink = popupFieldLink.value;
+
+  cardsList.prepend(createCard(placeName, placeLink));
+
+  popupFieldPlace.value = '';
+  popupFieldLink.value = '';
+
   popupClose();
 }
 
 //Функция увеличения картинок
 function zoomPhoto(template) {
-  document.querySelector('.popup_type_zoom-photo').classList.add('popup_opened');
-  document.querySelector('.popup__photo').src = template.querySelector('.card__photo').src;
-  document.querySelector('.popup__photo-caption').textContent = template.querySelector('.card__caption').textContent;
+  const cardCaption = template.querySelector('.card__caption').textContent;
+  popupTypeZoomPhoto.classList.add('popup_opened');
+  popupPhoto.src = template.querySelector('.card__photo').src;
+  popupPhotoCaption.textContent = cardCaption;
+  popupPhoto.alt = cardCaption;
 }
 
 /**************************************************** Слушатели вне функций **************************************************/
