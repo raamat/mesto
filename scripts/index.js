@@ -1,7 +1,5 @@
-/********************************************* Переменные профиля и модальных окон *********************************/
-
 const profileTitle = document.querySelector('.profile__title');
-let profileSubtitle = document.querySelector('.profile__subtitle');
+const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
 
 //Коллекция со всеми модальными окнами
@@ -9,31 +7,27 @@ const popupsList = document.querySelectorAll('.popup');
 
 let popupFieldName = document.querySelector('.popup__field_type_name');
 let popupFieldJob = document.querySelector('.popup__field_type_job');
-const popupForm = document.querySelector('.popup__form');
+const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-
-/********************************************* Переменные для карточек *********************************************/
 
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
-//const card = document.querySelector('.card');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 let popupFieldPlace = document.querySelector('.popup__field_type_place');
 let popupFieldLink = document.querySelector('.popup__field_type_link');
-//const popupCreateButton = document.querySelector('.popup__submit-button_type_create-card');
-const popupFormAddCard = document.querySelector('.popup__form_type_add-card');
+const formAddCard = document.querySelector('.popup__form_type_add-card');
 
-popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
-popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
-popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
+const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
+const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
+const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
 
 //Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
-function openPopup(template) {
-  template.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }  
 
 //Функция открытия модального окна редактирования профиля
@@ -45,12 +39,12 @@ function editProfile() {
 }
 
 //Универсальная функция закрытия модального окна
-function closePopup(template) {
-  template.classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 //Сохранение данных из формы редактирования профиля
-function saveForm(event) {
+function submitEditProfileForm(event) {
   /*Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
   мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
   event.preventDefault();
@@ -110,8 +104,8 @@ function addCard(event) {
 
   cardsList.prepend(createCard(placeName, placeLink));
 
-  popupFieldPlace.value = '';
-  popupFieldLink.value = '';
+ //Очистка полей ввода
+  formAddCard.reset();
 
   closePopup(popupAddCard);
 }
@@ -130,7 +124,7 @@ function zoomPhoto(src, caption) {
 /*****************************************************************************************************************************/
 
 //Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit
-popupForm.addEventListener('submit', saveForm);
+formEditProfile.addEventListener('submit', submitEditProfileForm);
 
 //Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', editProfile);
@@ -147,4 +141,4 @@ popupsList.forEach((popup) => {
 profileAddButton.addEventListener('click', openCardForm);
 
 //Слушатель события по кнопке "Создать" карточку
-popupFormAddCard.addEventListener('submit', addCard);
+formAddCard.addEventListener('submit', addCard);
