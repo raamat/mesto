@@ -5,8 +5,8 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 //Коллекция со всеми модальными окнами
 const popupsList = document.querySelectorAll('.popup');
 
-let popupFieldName = document.querySelector('.popup__field_type_name');
-let popupFieldJob = document.querySelector('.popup__field_type_job');
+let popupInputName = document.querySelector('.popup__input_type_name');
+let popupInputJob = document.querySelector('.popup__input_type_job');
 const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
@@ -14,8 +14,8 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
-let popupFieldPlace = document.querySelector('.popup__field_type_place');
-let popupFieldLink = document.querySelector('.popup__field_type_link');
+let popupInputPlace = document.querySelector('.popup__input_type_place');
+let popupInputLink = document.querySelector('.popup__input_type_link');
 const formAddCard = document.querySelector('.popup__form_type_add-card');
 
 const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
@@ -32,8 +32,8 @@ function openPopup(popup) {
 
 //Функция открытия модального окна редактирования профиля
 function editProfile() {
-  popupFieldName.value = profileTitle.textContent;
-  popupFieldJob.value = profileSubtitle.textContent;
+  popupInputName.value = profileTitle.textContent;
+  popupInputJob.value = profileSubtitle.textContent;
 
   openPopup(popupEditProfile);
 }
@@ -49,8 +49,8 @@ function submitEditProfileForm(event) {
   мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
   event.preventDefault();
 
-  profileTitle.textContent = popupFieldName.value;
-  profileSubtitle.textContent = popupFieldJob.value;
+  profileTitle.textContent = popupInputName.value;
+  profileSubtitle.textContent = popupInputJob.value;
   
   closePopup(popupEditProfile);
 }
@@ -58,14 +58,14 @@ function submitEditProfileForm(event) {
 /**************************************** Работа с карточками ***************************************/
 
 //Функция создания карточки
-function createCard(popupFieldPlace, popupFieldLink) {
+function createCard(popupInputPlace, popupInputLink) {
   //Ниже получаем содержимое контейнера li - "лишки", класс card
   const cardTemplateClone = cardTemplate.querySelector('.card').cloneNode(true);
 
   const cardPhoto = cardTemplateClone.querySelector('.card__photo');
-  cardTemplateClone.querySelector('.card__title').textContent = popupFieldPlace; 
-  cardPhoto.src = popupFieldLink;
-  cardPhoto.alt = popupFieldPlace;
+  cardTemplateClone.querySelector('.card__title').textContent = popupInputPlace; 
+  cardPhoto.src = popupInputLink;
+  cardPhoto.alt = popupInputPlace;
 
   //Удаление карточки
   cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
@@ -79,7 +79,7 @@ function createCard(popupFieldPlace, popupFieldLink) {
    
   //Слушатель увеличения картинки
   cardTemplateClone.querySelector('.card__photo').addEventListener('click', () => {
-    zoomPhoto(popupFieldLink, popupFieldPlace);
+    zoomPhoto(popupInputLink, popupInputPlace);
   });
 
   return cardTemplateClone;
@@ -99,8 +99,8 @@ function openCardForm(event) {
 function addCard(event) {
   event.preventDefault();
 
-  const placeName = popupFieldPlace.value;
-  const placeLink = popupFieldLink.value;
+  const placeName = popupInputPlace.value;
+  const placeLink = popupInputLink.value;
 
   cardsList.prepend(createCard(placeName, placeLink));
 

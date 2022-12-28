@@ -36,10 +36,10 @@
     <div class="popup__container">
       <button class="popup__close-button opacity" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form popup__form_type_edit-profile" name="popup-form-edit-profile">
-          <input class="popup__field popup__field_type_name" type="text" placeholder="Имя" name="name">
-          <input class="popup__field popup__field_type_job" type="text" placeholder="Род деятельности" name="job">
-          <button class="popup__submit-button" type="submit">Сохранить</button>
+        <form class="popup__form popup__form_type_edit-profile" name="popup-form-edit-profile" novalidate>
+          <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name" minlength="2" maxlength="40" required>
+          <input class="popup__input popup__input_type_job" type="text" placeholder="Род деятельности" name="job" minlength="2" maxlength="200" required>
+          <button class="popup__submit-button popup__submit-button_invalid" type="submit">Сохранить</button>
         </form>
     </div>
   </div>
@@ -48,8 +48,8 @@
       <button class="popup__close-button opacity" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
         <form class="popup__form popup__form_type_add-card" name="popup-form-add-card">
-          <input class="popup__field popup__field_type_place" type="text" placeholder="Название" name="place">
-          <input class="popup__field popup__field_type_link" type="text" placeholder="Ссылка на картинку" name="link">
+          <input class="popup__input popup__input_type_place" type="text" placeholder="Название" name="place" minlength="2" maxlength="30" required>
+          <input class="popup__input popup__input_type_link" type="url" placeholder="Ссылка на картинку" name="link" required>
           <button class="popup__submit-button popup__submit-button_type_create-card" type="submit">Создать</button>
         </form>
       </div>  
@@ -72,6 +72,7 @@
     </li>
   </template>
   <script src="scripts/constants.js"></script>
+  <script src="scripts/validate.js"></script>
   <script src="scripts/index.js"></script>
 </body>
 </html>
