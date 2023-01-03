@@ -61,11 +61,11 @@ const hasInvalidInput = (inputList) => {
 //Переключатель доступности кнопки - disabled = true/false (АН)
 function toggleButtonState(inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.remove(config.activeButtonClass);
+    //buttonElement.classList.remove(config.activeButtonClass);
     buttonElement.classList.add(config.inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.add(config.activeButtonClass);
+    //buttonElement.classList.add(config.activeButtonClass);
     buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = false;
   }
@@ -102,4 +102,5 @@ function enableValidation({ formSelector, ...restConfig }) {
 
 // Включение валидации вызовом enableValidation
 // Все настройки передаются при вызове
+
 enableValidation(validationConfig);

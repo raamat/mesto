@@ -98,7 +98,6 @@ function openCardForm(event) {
 //Функция добавления одной карточки
 function addCard(event) {
   event.preventDefault();
-
   const placeName = popupInputPlace.value;
   const placeLink = popupInputLink.value;
 
@@ -131,8 +130,8 @@ profileEditButton.addEventListener('click', editProfile);
 
 //Подвешиваем слушатель события клик по кнопке "Закрыть" на каждое окно
 popupsList.forEach((popup) => {
-  const closeButton = popup.querySelector(".popup__close-button");
-  closeButton.addEventListener("click", () => {
+  const closeButton = popup.querySelector('.popup__close-button');
+  closeButton.addEventListener('click', () => {
     closePopup(popup);
   });
 });
@@ -142,3 +141,12 @@ profileAddButton.addEventListener('click', openCardForm);
 
 //Слушатель события по кнопке "Создать" карточку
 formAddCard.addEventListener('submit', addCard);
+
+//Подвешиваем слушатель клика по popup на каждый popup
+popupsList.forEach((popup) => {
+  popup.addEventListener('click', (event) => {
+    if (event.target === event.currentTarget) {
+    closePopup(popup);
+    }
+  });
+});
