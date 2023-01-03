@@ -150,3 +150,12 @@ popupsList.forEach((popup) => {
     }
   });
 });
+
+//Слушатель событий, закрывающий модальное окно по нажатию на Esc
+popupsList.forEach((popup) => {
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+    closePopup(popup);
+    }
+  });
+});
