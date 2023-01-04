@@ -64,14 +64,22 @@ function submitEditProfileForm(event) {
 }
 
 //Функция закрытия модального окна при нажатии Esc
+/*
+function closePopupEsc(event) {
+  if (event.key === 'Escape') {
+    popupsList.forEach((popup) => {
+      closePopup(popup);
+    })
+  }
+}*/
 function closePopupEsc(event) {
   popupsList.forEach((popup) => {
-    if (event.key = 'Escape') {
+    if (event.key === 'Escape') {
       closePopup(popup);
     }
   })
-  }
-  
+}
+
 /**************************************** Работа с карточками ***************************************/
 
 //Функция создания карточки
