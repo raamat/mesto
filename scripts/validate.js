@@ -1,12 +1,3 @@
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_invalid',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
- };
-
 //Функция, которая добавляет классы с ошибками и выводит текст ошибки (АН)
 function showInputError(formElement, inputElement, config) {
   //Находим необходимый span при помощи шаблонной строки
@@ -101,4 +92,4 @@ function enableValidation({ formSelector, ...restConfig }) {
 // Включение валидации вызовом enableValidation
 // Все настройки передаются при вызове
 
-//enableValidation(validationConfig);
+enableValidation(validationConfig);

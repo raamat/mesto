@@ -5,8 +5,8 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 //Коллекция со всеми модальными окнами
 const popupsList = document.querySelectorAll('.popup');
 
-let popupInputName = document.querySelector('.popup__input_type_name');
-let popupInputJob = document.querySelector('.popup__input_type_job');
+const popupInputName = document.querySelector('.popup__input_type_name');
+const popupInputJob = document.querySelector('.popup__input_type_job');
 const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
@@ -14,8 +14,8 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
-let popupInputPlace = document.querySelector('.popup__input_type_place');
-let popupInputLink = document.querySelector('.popup__input_type_link');
+const popupInputPlace = document.querySelector('.popup__input_type_place');
+const popupInputLink = document.querySelector('.popup__input_type_link');
 const formAddCard = document.querySelector('.popup__form_type_add-card');
 
 const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
@@ -28,9 +28,6 @@ const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 //Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-
-  //Включаем валидацию форм
-  enableValidation(validationConfig);
 
   //Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
   document.addEventListener('keydown', closePopupEsc);
@@ -64,20 +61,11 @@ function submitEditProfileForm(event) {
 }
 
 //Функция закрытия модального окна при нажатии Esc
-/*
 function closePopupEsc(event) {
-  if (event.key === 'Escape') {
-    popupsList.forEach((popup) => {
-      closePopup(popup);
-    })
+  if (event.key ==='Escape') {
+    //Вызываем функцию closePopup для открытого модального окна, т.е. с модификатором 'popup_opened'
+    closePopup(document.querySelector('.popup_opened'));
   }
-}*/
-function closePopupEsc(event) {
-  popupsList.forEach((popup) => {
-    if (event.key === 'Escape') {
-      closePopup(popup);
-    }
-  })
 }
 
 /**************************************** Работа с карточками ***************************************/
@@ -170,7 +158,7 @@ formAddCard.addEventListener('submit', addCard);
 popupsList.forEach((popup) => {
   popup.addEventListener('click', (event) => {
     if (event.target === event.currentTarget) {
-    closePopup(popup);
+      closePopup(popup);
     }
   });
 });
