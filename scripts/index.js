@@ -28,6 +28,8 @@ const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 //Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  //Включаем валидацию форм
+  enableValidation(validationConfig);
 }  
 
 //Функция открытия модального окна редактирования профиля
