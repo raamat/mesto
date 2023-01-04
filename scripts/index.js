@@ -28,10 +28,13 @@ const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 //Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
   //Включаем валидацию форм
   enableValidation(validationConfig);
-}  
 
+  //Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
+  document.addEventListener('keydown', closePopupEsc);
+}
 //Функция открытия модального окна редактирования профиля
 function editProfile() {
   popupInputName.value = profileTitle.textContent;
@@ -43,6 +46,9 @@ function editProfile() {
 //Универсальная функция закрытия модального окна
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+
+  //Удаляем слушатель Esc
+  document.removeEventListener('keydown', closePopupEsc);
 }
 
 //Сохранение данных из формы редактирования профиля
@@ -57,6 +63,15 @@ function submitEditProfileForm(event) {
   closePopup(popupEditProfile);
 }
 
+//Функция закрытия модального окна при нажатии Esc
+function closePopupEsc(event) {
+  popupsList.forEach((popup) => {
+    if (event.key = 'Escape') {
+      closePopup(popup);
+    }
+  })
+  }
+  
 /**************************************** Работа с карточками ***************************************/
 
 //Функция создания карточки
@@ -120,7 +135,6 @@ function zoomPhoto(src, caption) {
 
   openPopup(popupZoomPhoto);
 }
-
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
 
@@ -148,15 +162,6 @@ formAddCard.addEventListener('submit', addCard);
 popupsList.forEach((popup) => {
   popup.addEventListener('click', (event) => {
     if (event.target === event.currentTarget) {
-    closePopup(popup);
-    }
-  });
-});
-
-//Слушатель событий, закрывающий модальное окно по нажатию на Esc
-popupsList.forEach((popup) => {
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
     closePopup(popup);
     }
   });
