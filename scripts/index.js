@@ -28,7 +28,7 @@ const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 //Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-
+  
   //Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
   document.addEventListener('keydown', closePopupEsc);
 }
@@ -38,11 +38,17 @@ function editProfile() {
   popupInputJob.value = profileSubtitle.textContent;
 
   openPopup(popupEditProfile);
+
+  //Проверяем валидность полей после открытия формы и делаем кнопку "Сохранить" активной
+  setButtonState(popupEditProfile);
 }
 
 //Универсальная функция закрытия модального окна
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+
+  //Проверяем валидность полей после закрытия формы
+  setButtonState(popup);
 
   //Удаляем слушатель Esc
   document.removeEventListener('keydown', closePopupEsc);
@@ -83,7 +89,7 @@ function createCard(popupInputPlace, popupInputLink) {
   //Удаление карточки
   cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
     cardTemplateClone.remove();
-});
+  });
 
   //Лайки
   cardTemplateClone.querySelector('.card__like-button').addEventListener('click', (event) => {
@@ -91,7 +97,7 @@ function createCard(popupInputPlace, popupInputLink) {
   })
    
   //Слушатель увеличения картинки
-  cardTemplateClone.querySelector('.card__photo').addEventListener('click', () => {
+  cardPhoto.addEventListener('click', () => {
     zoomPhoto(popupInputLink, popupInputPlace);
   });
 

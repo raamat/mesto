@@ -41,10 +41,10 @@ function checkInputValidity(formElement, inputElement, config) {
 const hasInvalidInput = (inputList) => {
   // Проходим по массиву полей методом some
   return inputList.some((inputElement) => {
+    
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся функция
     // hasInvalidInput вернёт true
-
     return !inputElement.validity.valid;
   })
 };
@@ -87,6 +87,18 @@ function enableValidation({ formSelector, ...restConfig }) {
   formList.forEach((formElement) => {
     setEventListeners(formElement, restConfig)
   })
+}
+
+//Функция проверяет валидность полей открытой формы и переключает состояние кнопки
+function setButtonState(popup) {
+  //Получаем форму
+  const formElement = popup.querySelector(validationConfig.formSelector);
+  //Получаем массив полей формы
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  //Находим кнопку submit
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+  //Выше мы получили все необходимые аргументы, чтобы вызвать функцию toggleButtonState
+  toggleButtonState(inputList, buttonElement, validationConfig);
 }
 
 // Включение валидации вызовом enableValidation
