@@ -13,7 +13,7 @@ function showInputError(formElement, inputElement, config) {
   inputElement.classList.add(config.inputErrorClass);
 }
 
-//Функция, которая удаляет классы со стилями ошибок (АН)
+//Функция, которая удаляет классы со стилями ошибок и удаляет тексты ошибок (АН)
 function hideInputError(formElement, inputElement, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
@@ -99,6 +99,24 @@ function setButtonState(popup) {
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   //Выше мы получили все необходимые аргументы, чтобы вызвать функцию toggleButtonState
   toggleButtonState(inputList, buttonElement, validationConfig);
+}
+
+//Функция сброса полей с ошибками
+function clearInputError(popup) {
+  //Получаем форму
+  const formElement = popup.querySelector(validationConfig.formSelector);
+  //Получаем массив полей формы
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  //Для каждого инпута запускаем функцию hideInputError
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, validationConfig);
+  })
+}
+
+//Функция очистки полей формы "Новое место"
+function clearInputPopupAddCard() {
+  popupInputPlace.value = '';
+  popupInputLink.value = ''; 
 }
 
 // Включение валидации вызовом enableValidation

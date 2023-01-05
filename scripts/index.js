@@ -41,6 +41,9 @@ function editProfile() {
 
   //Проверяем валидность полей после открытия формы и делаем кнопку "Сохранить" активной
   setButtonState(popupEditProfile);
+
+  //Удаляем стили и тексты ошибок, которые могут остаться после закрытия формы
+  clearInputError(popupEditProfile);
 }
 
 //Универсальная функция закрытия модального окна
@@ -49,6 +52,12 @@ function closePopup(popup) {
 
   //Проверяем валидность полей после закрытия формы
   setButtonState(popup);
+
+  //Удаляем стили и тексты ошибок
+  clearInputError(popup);
+
+  //Очищаем поля ввода формы "Новое место"
+  clearInputPopupAddCard();
 
   //Удаляем слушатель Esc
   document.removeEventListener('keydown', closePopupEsc);
