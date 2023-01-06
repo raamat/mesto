@@ -10,7 +10,7 @@ const popupInputJob = document.querySelector('.popup__input_type_job');
 const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
-const cardTemplate = document.querySelector('#card-template').content;
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const cardsList = document.querySelector('.cards__list');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -32,6 +32,7 @@ function openPopup(popup) {
   //Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
   document.addEventListener('keydown', closePopupEsc);
 }
+
 //Функция открытия модального окна редактирования профиля
 function editProfile() {
   popupInputName.value = profileTitle.textContent;
@@ -49,15 +50,6 @@ function editProfile() {
 //Универсальная функция закрытия модального окна
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-
-  //Проверяем валидность полей после закрытия формы
-  setButtonState(popup);
-
-  //Удаляем стили и тексты ошибок
-  clearInputError(popup);
-
-  //Очищаем поля ввода формы "Новое место"
-  clearInputPopupAddCard();
 
   //Удаляем слушатель Esc
   document.removeEventListener('keydown', closePopupEsc);
@@ -88,7 +80,7 @@ function closePopupEsc(event) {
 //Функция создания карточки
 function createCard(popupInputPlace, popupInputLink) {
   //Ниже получаем содержимое контейнера li - "лишки", класс card
-  const cardTemplateClone = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardTemplateClone = cardTemplate.cloneNode(true);
 
   const cardPhoto = cardTemplateClone.querySelector('.card__photo');
   cardTemplateClone.querySelector('.card__title').textContent = popupInputPlace; 
@@ -121,6 +113,15 @@ initialCards.forEach(function(element) {
 //Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 function openCardForm(event) {
   openPopup(popupAddCard);
+
+  //Проверяем валидность полей при открытии формы
+  setButtonState(popupAddCard);
+
+  //Удаляем стили и тексты ошибок
+  clearInputError(popupAddCard);
+  
+  //Очищаем поля ввода формы "Новое место"
+  formAddCard.reset();
 }
 
 //Функция добавления одной карточки
@@ -131,7 +132,7 @@ function addCard(event) {
 
   cardsList.prepend(createCard(placeName, placeLink));
 
- //Очистка полей ввода
+  //Очистка полей ввода
   formAddCard.reset();
 
   closePopup(popupAddCard);
@@ -146,6 +147,7 @@ function zoomPhoto(src, caption) {
 
   openPopup(popupZoomPhoto);
 }
+
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
 

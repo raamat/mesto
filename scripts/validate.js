@@ -112,13 +112,6 @@ function clearInputError(popup) {
     hideInputError(formElement, inputElement, validationConfig);
   })
 }
-
-//Функция очистки полей формы "Новое место"
-function clearInputPopupAddCard() {
-  popupInputPlace.value = '';
-  popupInputLink.value = ''; 
-}
-
 // Включение валидации вызовом enableValidation
 // Все настройки передаются при вызове
 
