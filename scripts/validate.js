@@ -89,6 +89,7 @@ function enableValidation({ formSelector, ...restConfig }) {
   })
 }
 
+/* В 6ПР нет задания проверять валидность форм при открытии или очищать формы от ошибок
 //Функция проверяет валидность полей открытой формы и переключает состояние кнопки
 function setButtonState(popup) {
   //Получаем форму
@@ -112,6 +113,8 @@ function clearInputError(popup) {
     hideInputError(formElement, inputElement, validationConfig);
   })
 }
+*/
+
 // Включение валидации вызовом enableValidation
 // Все настройки передаются при вызове
 

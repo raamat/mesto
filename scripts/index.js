@@ -22,6 +22,8 @@ const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
 const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
 const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 
+const buttonCreateCard = document.querySelector('.popup__submit-button_type_create-card');
+
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
 
@@ -41,10 +43,10 @@ function editProfile() {
   openPopup(popupEditProfile);
 
   //Проверяем валидность полей после открытия формы и делаем кнопку "Сохранить" активной
-  setButtonState(popupEditProfile);
+  //setButtonState(popupEditProfile);
 
   //Удаляем стили и тексты ошибок, которые могут остаться после закрытия формы
-  clearInputError(popupEditProfile);
+  //clearInputError(popupEditProfile);
 }
 
 //Универсальная функция закрытия модального окна
@@ -115,13 +117,19 @@ function openCardForm(event) {
   openPopup(popupAddCard);
 
   //Проверяем валидность полей при открытии формы
-  setButtonState(popupAddCard);
+  //setButtonState(popupAddCard);
 
   //Удаляем стили и тексты ошибок
-  clearInputError(popupAddCard);
+  //clearInputError(popupAddCard);
   
   //Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
+  
+  //Добавляем стиль неактивной кнопки
+  buttonCreateCard.classList.add('popup__submit-button_invalid');
+
+  //Делаем кнопку неактивной
+  buttonCreateCard.disable = 'true';
 }
 
 //Функция добавления одной карточки
@@ -157,11 +165,19 @@ formEditProfile.addEventListener('submit', submitEditProfileForm);
 //Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', editProfile);
 
-//Подвешиваем слушатель события клик по кнопке "Закрыть" на каждое окно
+//В одном цикле подвешиваем два слушателя
 popupsList.forEach((popup) => {
+  //Подвешиваем слушатель события клик по кнопке "Закрыть" на каждое окно
   const closeButton = popup.querySelector('.popup__close-button');
   closeButton.addEventListener('click', () => {
     closePopup(popup);
+  });
+  
+  //Подвешиваем слушатель клика по popup на каждый popup
+  popup.addEventListener('click', (event) => {
+    if (event.target === event.currentTarget) {
+      closePopup(popup);
+    }
   });
 });
 
@@ -170,12 +186,3 @@ profileAddButton.addEventListener('click', openCardForm);
 
 //Слушатель события по кнопке "Создать" карточку
 formAddCard.addEventListener('submit', addCard);
-
-//Подвешиваем слушатель клика по popup на каждый popup
-popupsList.forEach((popup) => {
-  popup.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) {
-      closePopup(popup);
-    }
-  });
-});
