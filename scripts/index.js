@@ -140,9 +140,6 @@ function addCard(event) {
 
   cardsList.prepend(createCard(placeName, placeLink));
 
-  //Очистка полей ввода
-  formAddCard.reset();
-
   closePopup(popupAddCard);
 }
 
