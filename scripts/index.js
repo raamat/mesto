@@ -149,7 +149,6 @@ function zoomPhoto(src, caption) {
   popupPhoto.alt = caption;
 
   popupPhotoCaption.textContent = caption;
-
   openPopup(popupZoomPhoto);
 }
 
