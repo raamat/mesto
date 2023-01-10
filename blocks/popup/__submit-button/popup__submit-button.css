@@ -17,13 +17,6 @@
   opacity: .8;
 }
 
-.popup__submit-button:disabled {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.2);
-  background: #fff;
-  cursor: auto;
-}
-
 @media screen and (max-width: 320px) {
   .popup__submit-button {
     height: 46px;

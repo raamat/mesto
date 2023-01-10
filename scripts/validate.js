@@ -42,7 +42,7 @@ const hasInvalidInput = (inputList) => {
   // Проходим по массиву полей методом some
   return inputList.some((inputElement) => {
     
-    // Если поле не валидно, колбэк вернёт true
+    // Если поле невалидно, колбэк вернёт true
     // Обход массива прекратится и вся функция
     // hasInvalidInput вернёт true
     return !inputElement.validity.valid;
