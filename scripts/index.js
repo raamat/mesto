@@ -124,12 +124,6 @@ function openCardForm(event) {
   
   //Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
-  
-  //Добавляем стиль неактивной кнопки
-  buttonCreateCard.classList.add('popup__submit-button_invalid');
-
-  //Делаем кнопку неактивной
-  buttonCreateCard.disable = 'true';
 }
 
 //Функция добавления одной карточки

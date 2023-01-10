@@ -52,10 +52,10 @@ const hasInvalidInput = (inputList) => {
 //Переключатель доступности кнопки - disabled = true/false (АН)
 function toggleButtonState(inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(config.inactiveButtonClass);
+    //buttonElement.classList.add(config.inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove(config.inactiveButtonClass);
+    //buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 }
@@ -65,6 +65,8 @@ function toggleButtonState(inputList, buttonElement, config) {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
+  formElement.addEventListener('reset', () => (buttonElement.disabled = true));
+  
   toggleButtonState(inputList, buttonElement, config);
 
    inputList.forEach((inputElement) => {
