@@ -49,23 +49,24 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-//Переключатель доступности кнопки - disabled = true/false (АН)
-function toggleButtonState(inputList, buttonElement, config) {
-  if (hasInvalidInput(inputList)) {
-    //buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.disabled = true;
-  } else {
-    //buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.disabled = false;
-  }
+// false - разблокировать кнопку "Submit"; true - заблокировать кнопку "Submit"
+function lockButtonState(buttonElement, is) {
+  buttonElement.disabled = is;
 }
 
- //Получаем список всех полей 
- function setEventListeners(formElement, config) {
+/* Переключатель доступности кнопки - disabled = true/false
+Функция hasInvalidInput возваращает true или false*/
+function toggleButtonState(inputList, buttonElement, config) {
+  lockButtonState(buttonElement, hasInvalidInput(inputList));  
+}
+
+// Получаем список всех полей 
+function setEventListeners(formElement, config) {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
-  formElement.addEventListener('reset', () => (buttonElement.disabled = true));
+  // При сбрасывании полей кнопку блокировать
+  formElement.addEventListener('reset', () => lockButtonState(buttonElement, true));
   
   toggleButtonState(inputList, buttonElement, config);
 
