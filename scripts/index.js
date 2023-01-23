@@ -106,12 +106,12 @@ function createCard(popupInputPlace, popupInputLink) {
 
   return cardTemplateClone;
 }
-
+/*
 //Добавление 6 картинок с подписями, для этого запускаем цикл по массиву initialCards
 initialCards.forEach(function(element) {
   cardsList.append(createCard(element.name, element.link));
 })
-
+*/
 //Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 function openCardForm(event) {
   openPopup(popupAddCard);
