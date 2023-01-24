@@ -1,7 +1,9 @@
 class Card {
-  constructor(link, name) {
-    this._link = link;
-    this._name = name;
+  //Подготовка класса к масштабированию
+  //Передаем данные в конструктор в види объекта
+  constructor(data) {
+    this._link = data.link;
+    this._name = data.name;
   }
 
   /* Метод для получения для получения разметки:
@@ -32,7 +34,30 @@ class Card {
 
     return this._element;
   }
+  
+  /*
+  _handleOpenPopup() {
+    popupPhoto.crs = this._link;
+    popupZoomPhoto.classList.add('popup_opened');
+  }
 
+  _handleClosePopup() {
+    popupPhoto.crs = '';
+    popupZoomPhoto.classList.remove('popup_opened');    
+  }
+
+  // Все обработчики в одном месте
+  _setEventListeners() {
+    this._element.addEventListener('click', () => {
+      this._handleOpenPopup();  
+    })
+    
+    popupCloseButton.addEventListener('click', () => {
+      this._handleClosePopup();
+    })
+  }
+  */
+  
   like() {
     this.isLiked = !this.isLiked;
   }
@@ -40,7 +65,7 @@ class Card {
 
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
-  const card = new Card(item.link, item.name);
+  const card = new Card(item); // передаём объект аргументом
 
   // Создаем карточку и возращаем наружу
   const cardElement = card.generateCard();
@@ -48,3 +73,5 @@ initialCards.forEach((item) => {
   // Добавляем в DOM
   document.querySelector('.cards__list').append(cardElement);
 })
+
+console.log(popupPhoto)
