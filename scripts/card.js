@@ -1,20 +1,24 @@
 class Card {
-  //Подготовка класса к масштабированию
-  //Передаем данные в конструктор в види объекта
-  constructor(data) {
+  /* Подготовка класса к масштабированию:
+  1) передаем данные в конструктор в виде объекта
+  2) делаем селектор частью конструктора класса - класс станет универсальным: 
+  он научится создавать карточки в разных стилях в зависимости от модификатора */
+  constructor(data, templateSelector) {
     this._link = data.link;
     this._name = data.name;
+    this._templateSelector = templateSelector; // записали селектор в приватное поле
   }
 
-  /* Метод для получения для получения разметки:
-  1) найдёт template-элемент с id card-template,
+  /* Метод для получения разметки:
+  1) найдёт template-элемент,
   2) извлечёт его содержимое,
   3) в содержимом найдёт элемент с классом card,
   4) клонирует его,
   5) вернёт клонированный элемент. */
   _getTemplate() {
+    // Метод универсальный, поэтому вместо id конкретного шаблона ('#card-template'), используем this._templateSelector
     const cardElement = document
-    .querySelector('#card-template')
+    .querySelector(this._templateSelector)
     .content
     .querySelector('.card')
     .cloneNode(true);
@@ -63,9 +67,10 @@ class Card {
   }
 }
 
+// Проходим по массиву initialCards с объектами и публикуем 6 карточек
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
-  const card = new Card(item); // передаём объект аргументом
+  const card = new Card(item, '#card-template'); // передаём аргументами объект и селектор темплейта
 
   // Создаем карточку и возращаем наружу
   const cardElement = card.generateCard();
@@ -73,5 +78,3 @@ initialCards.forEach((item) => {
   // Добавляем в DOM
   document.querySelector('.cards__list').append(cardElement);
 })
-
-console.log(popupPhoto)
