@@ -1,4 +1,4 @@
-import Card from './Card.js';
+import Card from './card.js';
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
