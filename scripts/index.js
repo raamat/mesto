@@ -127,6 +127,7 @@ function openCardForm(event) {
 }
 
 //Функция добавления одной карточки
+/*
 function addCard(event) {
   event.preventDefault();
   const placeName = popupInputPlace.value;
@@ -136,8 +137,9 @@ function addCard(event) {
 
   closePopup(popupAddCard);
 }
-
+*/
 //Функция увеличения картинок
+/*24.01.2023 реализована в классе Card
 function zoomPhoto(src, caption) {
   popupPhoto.src = src;
   popupPhoto.alt = caption;
@@ -145,6 +147,7 @@ function zoomPhoto(src, caption) {
   popupPhotoCaption.textContent = caption;
   openPopup(popupZoomPhoto);
 }
+*/
 
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
@@ -171,8 +174,8 @@ popupsList.forEach((popup) => {
   });
 });
 
-//Слушатель события клик по кнопке "Добавить" карточку
-profileAddButton.addEventListener('click', openCardForm);
+//Слушатель события клик по кнопке "Добавить" карточку - перенес в Card 24.01.2023
+//profileAddButton.addEventListener('click', openCardForm);
 
-//Слушатель события по кнопке "Создать" карточку
-formAddCard.addEventListener('submit', addCard);
+//Слушатель события по кнопке "Создать" карточку - перенес в Card 24.01.2023
+//formAddCard.addEventListener('submit', addCard);

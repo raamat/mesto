@@ -1,3 +1,5 @@
+const popupCloseButton = document.querySelector('.popup__close-button');
+
 class Card {
   /* Подготовка класса к масштабированию:
   1) передаем данные в конструктор в виде объекта
@@ -30,42 +32,72 @@ class Card {
   generateCard() {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
-    this._element = this._getTemplate(); 
+    this._element = this._getTemplate();
+
+    //Добавляем вызов _setEventListeners, чтобы метод создал карточки уже с обработчиком
+    this._setEventListeners();
 
     // Добавим данные
-    this._element.querySelector('.card__photo').src = this._link;
+    const cardPhoto = this._element.querySelector('.card__photo');
+    cardPhoto.src = this._link;
+    cardPhoto.alt = this._name;
     this._element.querySelector('.card__title').textContent = this._name;
 
     return this._element;
   }
   
-  /*
   _handleOpenPopup() {
-    popupPhoto.crs = this._link;
+    popupPhoto.src = this._link;
+    popupPhoto.alt = this._name;
+    popupPhotoCaption.textContent = this._name;
+
     popupZoomPhoto.classList.add('popup_opened');
   }
 
   _handleClosePopup() {
-    popupPhoto.crs = '';
+    popupPhoto.src = '';
     popupZoomPhoto.classList.remove('popup_opened');    
   }
 
-  // Все обработчики в одном месте
+  /***************** Все обработчики в одном месте *****************/
   _setEventListeners() {
     this._element.addEventListener('click', () => {
-      this._handleOpenPopup();  
+      this._handleOpenPopup();
     })
     
     popupCloseButton.addEventListener('click', () => {
       this._handleClosePopup();
     })
+
+    //Слушатель события клик по кнопке "Добавить" карточку
+    profileAddButton.addEventListener('click', openCardForm);
+
+  
   }
-  */
   
   like() {
     this.isLiked = !this.isLiked;
   }
 }
+
+// Метод созадния одной карточки
+function addCard(event) {
+  event.preventDefault();
+  const data = new Object;
+  data.name = popupInputPlace.value;
+  data.link = popupInputLink.value;
+  
+  const card = new Card(data, '#card-template');
+
+  const cardElement = card.generateCard();
+
+  document.querySelector('.cards__list').prepend(cardElement);
+  
+  closePopup(popupAddCard);
+}
+
+//Слушатель события по кнопке "Создать" карточку
+formAddCard.addEventListener('submit', addCard);
 
 // Проходим по массиву initialCards с объектами и публикуем 6 карточек
 initialCards.forEach((item) => {
