@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -79,6 +81,42 @@ function closePopupEsc(event) {
 
 /**************************************** Работа с карточками ***************************************/
 
+/**************** Новый код ************************/
+
+// Метод созадния одной карточки
+function addCard(event) {
+  event.preventDefault();
+  const data = new Object;
+  data.name = popupInputPlace.value;
+  data.link = popupInputLink.value;
+  
+  const card = new Card(data, '#card-template');
+
+  const cardElement = card.generateCard();
+
+  document.querySelector('.cards__list').prepend(cardElement);
+  
+  closePopup(popupAddCard);
+}
+
+//Слушатель события по кнопке "Создать" карточку
+formAddCard.addEventListener('submit', addCard);
+
+// Проходим по массиву initialCards с объектами и публикуем 6 карточек
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item, '#card-template'); // передаём аргументами объект и селектор темплейта
+
+  // Создаем карточку и возращаем наружу
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  document.querySelector('.cards__list').append(cardElement);
+})
+
+/***************************************************/
+
+/*
 //Функция создания карточки
 function createCard(popupInputPlace, popupInputLink) {
   //Ниже получаем содержимое контейнера li - "лишки", класс card
@@ -88,30 +126,39 @@ function createCard(popupInputPlace, popupInputLink) {
   cardTemplateClone.querySelector('.card__title').textContent = popupInputPlace; 
   cardPhoto.src = popupInputLink;
   cardPhoto.alt = popupInputPlace;
-
+*/
   //Удаление карточки
+  /*
   cardTemplateClone.querySelector('.card__delete-button').addEventListener('click', () => {
     cardTemplateClone.remove();
   });
+  */
 
   //Лайки
+  /*
   cardTemplateClone.querySelector('.card__like-button').addEventListener('click', (event) => {
     event.target.classList.toggle('card__like-button_active');
   })
-   
+  */ 
+
   //Слушатель увеличения картинки
+  /*
   cardPhoto.addEventListener('click', () => {
     zoomPhoto(popupInputLink, popupInputPlace);
   });
+  
 
   return cardTemplateClone;
 }
+*/
+
 /*
 //Добавление 6 картинок с подписями, для этого запускаем цикл по массиву initialCards
 initialCards.forEach(function(element) {
   cardsList.append(createCard(element.name, element.link));
 })
 */
+/*
 //Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 function openCardForm(event) {
   openPopup(popupAddCard);
@@ -125,7 +172,7 @@ function openCardForm(event) {
   //Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
 }
-
+*/
 //Функция добавления одной карточки
 /*
 function addCard(event) {

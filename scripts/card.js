@@ -1,4 +1,10 @@
 const popupCloseButton = document.querySelector('.popup__close-button');
+const profileAddButton = document.querySelector('.profile__add-button');
+const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
+const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
+const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const formAddCard = document.querySelector('.popup__form_type_add-card');
 
 class Card {
   /* Подготовка класса к масштабированию:
@@ -46,7 +52,7 @@ class Card {
     return this._element;
   }
   
-  _handleOpenPopup() {
+  _handleOpenPopupZoom() {
     popupPhoto.src = this._link;
     popupPhoto.alt = this._name;
     popupPhotoCaption.textContent = this._name;
@@ -54,59 +60,44 @@ class Card {
     popupZoomPhoto.classList.add('popup_opened');
   }
 
-  _handleClosePopup() {
+  _handleClosePopupZoom() {
     popupPhoto.src = '';
     popupZoomPhoto.classList.remove('popup_opened');    
   }
 
+  _handleOpenPopupAdd() {
+    popupAddCard.classList.add('popup_opened');
+
+    //Очищаем поля ввода формы "Новое место"
+    formAddCard.reset();
+  }  
+
   /***************** Все обработчики в одном месте *****************/
   _setEventListeners() {
     this._element.addEventListener('click', () => {
-      this._handleOpenPopup();
+      this._handleOpenPopupZoom();
     })
     
     popupCloseButton.addEventListener('click', () => {
-      this._handleClosePopup();
+      this._handleClosePopupZoom();
     })
 
     //Слушатель события клик по кнопке "Добавить" карточку
-    profileAddButton.addEventListener('click', openCardForm);
+    profileAddButton.addEventListener('click', () => {
+      this._handleOpenPopupAdd();
+    });
 
-  
+    //Удаление карточки
+    this._element.querySelector('.card__delete-button').addEventListener('click', () => {
+    this._element.remove();
+    });
+
+    //Лайки
+    this._element.querySelector('.card__like-button').addEventListener('click', (event) => {
+      event.target.classList.toggle('card__like-button_active');
+    });
   }
   
-  like() {
-    this.isLiked = !this.isLiked;
-  }
 }
 
-// Метод созадния одной карточки
-function addCard(event) {
-  event.preventDefault();
-  const data = new Object;
-  data.name = popupInputPlace.value;
-  data.link = popupInputLink.value;
-  
-  const card = new Card(data, '#card-template');
-
-  const cardElement = card.generateCard();
-
-  document.querySelector('.cards__list').prepend(cardElement);
-  
-  closePopup(popupAddCard);
-}
-
-//Слушатель события по кнопке "Создать" карточку
-formAddCard.addEventListener('submit', addCard);
-
-// Проходим по массиву initialCards с объектами и публикуем 6 карточек
-initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item, '#card-template'); // передаём аргументами объект и селектор темплейта
-
-  // Создаем карточку и возращаем наружу
-  const cardElement = card.generateCard();
-
-  // Добавляем в DOM
-  document.querySelector('.cards__list').append(cardElement);
-})
+export default Card;
