@@ -1,3 +1,5 @@
+import { validationConfig } from './constants.js';
+
 //Функция, которая добавляет классы с ошибками и выводит текст ошибки (АН)
 function showInputError(formElement, inputElement, config) {
   //Находим необходимый span при помощи шаблонной строки

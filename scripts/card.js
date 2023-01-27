@@ -1,3 +1,4 @@
+import { openPopup, openCardForm, zoomPhoto } from "./index.js";
 const popupCloseButton = document.querySelector('.popup__close-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
@@ -34,21 +35,28 @@ class Card {
     return(cardElement);
   }
 
-  // Метод вставит данные в разметку и подготовит карточку к публикации
+  //Чтобы разгрузить generateCard(), перенёс заполнение карточки данными в отдельную функцию
+  _setData() {
+    const cardPhoto = this._element.querySelector('.card__photo');
+    cardPhoto.src = this._link;
+    cardPhoto.alt = this._name;
+    this._element.querySelector('.card__title').textContent = this._name;
+  }
+
+  /* Публичный метод вставит данные в разметку и подготовит карточку к публикации
+  (вернет карточку с заполнеными данными) */
   generateCard() {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
 
-    //Добавляем вызов _setEventListeners, чтобы метод создал карточки уже с обработчиком
+    // Заполняем разметку данными
+    this._setData();
+
+    //Добавляем вызов _setEventListeners, чтобы метод создал карточки уже со всеми обработчиками
     this._setEventListeners();
 
-    // Добавим данные
-    const cardPhoto = this._element.querySelector('.card__photo');
-    cardPhoto.src = this._link;
-    cardPhoto.alt = this._name;
-    this._element.querySelector('.card__title').textContent = this._name;
-
+    //Возвращаем готовую к публикации карточку
     return this._element;
   }
   
@@ -60,39 +68,43 @@ class Card {
     popupZoomPhoto.classList.add('popup_opened');
   }
 
+  /*
   _handleClosePopupZoom() {
     popupPhoto.src = '';
     popupZoomPhoto.classList.remove('popup_opened');    
   }
-
+  */
+  //Открытие модального окна с формой добавления карточки
   _handleOpenPopupAdd() {
     popupAddCard.classList.add('popup_opened');
-
     //Очищаем поля ввода формы "Новое место"
     formAddCard.reset();
-  }  
-
+  }
   /***************** Все обработчики в одном месте *****************/
   _setEventListeners() {
-    this._element.addEventListener('click', () => {
-      this._handleOpenPopupZoom();
-    })
+
+    // Слушатель увеличения картинки
     
+    this._element.querySelector('.card__photo').addEventListener('click', () => {
+      //this._handleOpenPopupZoom();
+      zoomPhoto(this._link, this._name);
+    })
+    /*
     popupCloseButton.addEventListener('click', () => {
       this._handleClosePopupZoom();
     })
-
-    //Слушатель события клик по кнопке "Добавить" карточку
+    */
+    // Слушатель события клик по кнопке "Добавить" карточку
     profileAddButton.addEventListener('click', () => {
       this._handleOpenPopupAdd();
     });
 
-    //Удаление карточки
+    // Удаление карточки
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {
-    this._element.remove();
+      this._element.remove();
     });
 
-    //Лайки
+    // Лайки
     this._element.querySelector('.card__like-button').addEventListener('click', (event) => {
       event.target.classList.toggle('card__like-button_active');
     });

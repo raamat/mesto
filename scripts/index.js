@@ -1,4 +1,7 @@
 import Card from './card.js';
+import FormValidator from './formValidator.js';
+import { validationConfig, initialCards } from './constants.js';
+export { openPopup, openCardForm, zoomPhoto };
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -158,7 +161,7 @@ initialCards.forEach(function(element) {
   cardsList.append(createCard(element.name, element.link));
 })
 */
-/*
+
 //Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 function openCardForm(event) {
   openPopup(popupAddCard);
@@ -172,7 +175,7 @@ function openCardForm(event) {
   //Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
 }
-*/
+
 //Функция добавления одной карточки
 /*
 function addCard(event) {
@@ -186,7 +189,7 @@ function addCard(event) {
 }
 */
 //Функция увеличения картинок
-/*24.01.2023 реализована в классе Card
+/*24.01.2023 реализована в классе Card*/
 function zoomPhoto(src, caption) {
   popupPhoto.src = src;
   popupPhoto.alt = caption;
@@ -194,7 +197,7 @@ function zoomPhoto(src, caption) {
   popupPhotoCaption.textContent = caption;
   openPopup(popupZoomPhoto);
 }
-*/
+
 
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
