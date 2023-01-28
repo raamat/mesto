@@ -1,11 +1,4 @@
-import { openPopup, openCardForm, zoomPhoto } from "./index.js";
-const popupCloseButton = document.querySelector('.popup__close-button');
-const profileAddButton = document.querySelector('.profile__add-button');
-const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
-const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
-const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
-const popupAddCard = document.querySelector('.popup_type_add-card');
-const formAddCard = document.querySelector('.popup__form_type_add-card');
+import { zoomPhoto } from "./index.js";
 
 class Card {
   /* Подготовка класса к масштабированию:
@@ -60,45 +53,15 @@ class Card {
     return this._element;
   }
   
-  _handleOpenPopupZoom() {
-    popupPhoto.src = this._link;
-    popupPhoto.alt = this._name;
-    popupPhotoCaption.textContent = this._name;
-
-    popupZoomPhoto.classList.add('popup_opened');
-  }
-
-  /*
-  _handleClosePopupZoom() {
-    popupPhoto.src = '';
-    popupZoomPhoto.classList.remove('popup_opened');    
-  }
-  */
-  //Открытие модального окна с формой добавления карточки
-  _handleOpenPopupAdd() {
-    popupAddCard.classList.add('popup_opened');
-    //Очищаем поля ввода формы "Новое место"
-    formAddCard.reset();
-  }
   /***************** Все обработчики в одном месте *****************/
   _setEventListeners() {
 
     // Слушатель увеличения картинки
-    
     this._element.querySelector('.card__photo').addEventListener('click', () => {
       //this._handleOpenPopupZoom();
       zoomPhoto(this._link, this._name);
     })
-    /*
-    popupCloseButton.addEventListener('click', () => {
-      this._handleClosePopupZoom();
-    })
-    */
-    // Слушатель события клик по кнопке "Добавить" карточку
-    profileAddButton.addEventListener('click', () => {
-      this._handleOpenPopupAdd();
-    });
-
+   
     // Удаление карточки
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {
       this._element.remove();
