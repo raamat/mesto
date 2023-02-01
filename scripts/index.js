@@ -1,7 +1,7 @@
 import Card from './card.js';
 import FormValidator from './formValidator.js';
 import { validationConfig, initialCards } from './constants.js';
-export { openPopup, openCardForm, zoomPhoto };
+export { zoomPhoto };
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -15,10 +15,6 @@ const popupInputJob = document.querySelector('.popup__input_type_job');
 const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
-const cardTemplate = document
-  .querySelector('#card-template')
-  .content
-  .querySelector('.card');
 const cardsList = document.querySelector('.cards__list');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -29,8 +25,6 @@ const formAddCard = document.querySelector('.popup__form_type_add-card');
 const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
 const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
 const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
-
-const buttonCreateCard = document.querySelector('.popup__submit-button_type_create-card');
 
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
@@ -84,6 +78,13 @@ function closePopupEsc(event) {
     closePopup(document.querySelector('.popup_opened'));
   }
 }
+
+//Включение валидации форм
+const formAddValidation = new FormValidator(validationConfig, formAddCard);
+formAddValidation.enableValidation();
+
+const formEditValidation = new FormValidator(validationConfig, formEditProfile);
+formEditValidation.enableValidation();
 
 /**************************************** Работа с карточками ***************************************/
 
@@ -168,3 +169,4 @@ profileAddButton.addEventListener('click', openCardForm);
 
 //Слушатель события по кнопке "Создать" карточку
 formAddCard.addEventListener('submit', addCard);
+
