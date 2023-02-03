@@ -88,32 +88,29 @@ formEditValidation.enableValidation();
 
 /**************************************** Работа с карточками ***************************************/
 
-// Создание одной карточки
+// Функция создания карточки
+function createCard(obj, template) {
+  const card = new Card(obj, template);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+// Вставляем карточку в DOM
 function addCard(event) {
   event.preventDefault();
   const data = new Object;
   data.name = popupInputPlace.value;
   data.link = popupInputLink.value;
   
-  const card = new Card(data, '#card-template');
+  cardsList.prepend(createCard(data, '#card-template'));
 
-  const cardElement = card.generateCard();
-
-  cardsList.prepend(cardElement);
-  
   closePopup(popupAddCard);
 }
 
 // Проходим по массиву initialCards с объектами и публикуем 6 карточек
 initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item, '#card-template'); // передаём аргументами объект и селектор темплейта
-
-  // Создаем карточку и возращаем наружу
-  const cardElement = card.generateCard();
-
-  // Добавляем в DOM
-  cardsList.append(cardElement);
+  // Добавляем в DOM элемент массива
+  cardsList.append(createCard(item, '#card-template'));
 })
 
 // Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened

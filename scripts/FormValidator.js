@@ -10,8 +10,6 @@ class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._formElement = formElement;
-    
-
   }
 
   // Метод (является свойством объекта), который добавляет классы с ошибками и выводит текст ошибки (АН)

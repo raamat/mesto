@@ -57,9 +57,14 @@ class Card {
     //Возвращаем готовую к публикации карточку
     return this._element;
   }
+  
+  // Функция-обработчик удаления карточки
+  _handleDelete = () => {
+    this._element.remove();
+  }
 
-  // Переключение состояния кнопки "Лайк"
-  _like = () => {
+  // Функция-обработчик переключение состояния кнопки "Лайк"
+  _handleLike = () => {
     this._buttonLike.classList.toggle('card__like-button_active');
   }
   
@@ -72,12 +77,10 @@ class Card {
     })
    
     // Удаление карточки
-    this._element.querySelector('.card__delete-button').addEventListener('click', () => {
-      this._element.remove();
-    });
+    this._element.querySelector('.card__delete-button').addEventListener('click', this._handleDelete);
 
     // Слушатель лайков
-    this._buttonLike.addEventListener('click', this._like);
+    this._buttonLike.addEventListener('click', this._handleLike);
   }
 }
 
