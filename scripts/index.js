@@ -1,5 +1,5 @@
-import Card from './card.js';
-import FormValidator from './formValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 import { validationConfig, initialCards } from './constants.js';
 export { zoomPhoto };
 
@@ -29,29 +29,29 @@ const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
 
-//Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
+// Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   
-  //Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
+  // Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
   document.addEventListener('keydown', closePopupEsc);
 }
 
-//Функция открытия модального окна редактирования профиля
+// Функция открытия модального окна редактирования профиля
 function editProfile() {
   popupInputName.value = profileTitle.textContent;
   popupInputJob.value = profileSubtitle.textContent;
 
   openPopup(popupEditProfile);
 
-  //Проверяем валидность полей после открытия формы и делаем кнопку "Сохранить" активной
-  //setButtonState(popupEditProfile);
+  // Проверяем валидность полей после открытия формы и делаем кнопку "Сохранить" активной
+  // setButtonState(popupEditProfile);
 
-  //Удаляем стили и тексты ошибок, которые могут остаться после закрытия формы
-  //clearInputError(popupEditProfile);
+  // Удаляем стили и тексты ошибок, которые могут остаться после закрытия формы
+  // clearInputError(popupEditProfile);
 }
 
-//Универсальная функция закрытия модального окна
+// Универсальная функция закрытия модального окна
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
@@ -59,7 +59,7 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEsc);
 }
 
-//Сохранение данных из формы редактирования профиля
+// Сохранение данных из формы редактирования профиля
 function submitEditProfileForm(event) {
   /*Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
   мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
@@ -71,15 +71,15 @@ function submitEditProfileForm(event) {
   closePopup(popupEditProfile);
 }
 
-//Функция закрытия модального окна при нажатии Esc
+// Функция закрытия модального окна при нажатии Esc
 function closePopupEsc(event) {
   if (event.key ==='Escape') {
-    //Вызываем функцию closePopup для открытого модального окна, т.е. с модификатором 'popup_opened'
+    // Вызываем функцию closePopup для открытого модального окна, т.е. с модификатором 'popup_opened'
     closePopup(document.querySelector('.popup_opened'));
   }
 }
 
-//Включение валидации форм
+// Включение валидации форм
 const formAddValidation = new FormValidator(validationConfig, formAddCard);
 formAddValidation.enableValidation();
 
@@ -116,21 +116,22 @@ initialCards.forEach((item) => {
   cardsList.append(cardElement);
 })
 
-//Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
+// Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 function openCardForm(event) {
   openPopup(popupAddCard);
 
-  //Проверяем валидность полей при открытии формы
-  //setButtonState(popupAddCard);
+  // Проверяем валидность полей при открытии формы
+  // setButtonState(popupAddCard);
 
-  //Удаляем стили и тексты ошибок
-  //clearInputError(popupAddCard);
+  // Удаляем стили и тексты ошибок
+  // clearInputError(popupAddCard);
   
-  //Очищаем поля ввода формы "Новое место"
+  // Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
 }
 
-//Функция увеличения картинок
+// Функция увеличения картинок
+ 
 function zoomPhoto(src, caption) {
   popupPhoto.src = src;
   popupPhoto.alt = caption;
@@ -142,21 +143,21 @@ function zoomPhoto(src, caption) {
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
 
-//Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit
+// Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 
-//Слушатель события клик по кнопке "Редактировать"
+// Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', editProfile);
 
-//В одном цикле подвешиваем два слушателя
+// В одном цикле подвешиваем два слушателя
 popupsList.forEach((popup) => {
-  //Подвешиваем слушатель события клик по кнопке "Закрыть" на каждое окно
+  // Подвешиваем слушатель события клик по кнопке "Закрыть" на каждое окно
   const closeButton = popup.querySelector('.popup__close-button');
   closeButton.addEventListener('click', () => {
     closePopup(popup);
   });
   
-  //Подвешиваем слушатель клика по popup на каждый popup
+  // Подвешиваем слушатель клика по popup на каждый popup
   popup.addEventListener('click', (event) => {
     if (event.target === event.currentTarget) {
       closePopup(popup);
@@ -164,9 +165,9 @@ popupsList.forEach((popup) => {
   });
 });
 
-//Слушатель события клик по кнопке "Добавить" карточку
+// Слушатель события клик по кнопке "Добавить" карточку
 profileAddButton.addEventListener('click', openCardForm);
 
-//Слушатель события по кнопке "Создать" карточку
+// Слушатель события по кнопке "Создать" карточку
 formAddCard.addEventListener('submit', addCard);
 

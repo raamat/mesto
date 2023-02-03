@@ -5,34 +5,40 @@ class FormValidator {
     // В методах за объектом настроек следует обращаться к полю класса,
     // а не передавать его в каждый метод, как это было реализовано ранее.
     this._config = config;
+    this._inputSelector = config.inputSelector;
+    this._buttonElement = config.submitButtonSelector;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
     this._formElement = formElement;
+    
+
   }
 
   // Метод (является свойством объекта), который добавляет классы с ошибками и выводит текст ошибки (АН)
   _showInputError(inputElement) {
-    //Находим необходимый span при помощи шаблонной строки
+    // Находим необходимый span при помощи шаблонной строки
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
 
-    //Делаем span видимым за счет добавления класса 'popup__input-error_visible'
-    errorElement.classList.add(this._config.errorClass);
+    // Делаем span видимым за счет добавления класса 'popup__input-error_visible'
+    errorElement.classList.add(this._errorClass);
 
-    //Свойство validationMessage - есть у всех полей ввода. В нём записан текст сообщения об ошибке. 
-    //Браузер показывает его по умолчанию, когда вводят некорректные данные.
+    // Свойство validationMessage - есть у всех полей ввода. В нём записан текст сообщения об ошибке. 
+    // Браузер показывает его по умолчанию, когда вводят некорректные данные.
     errorElement.textContent = inputElement.validationMessage;
 
-    //Превращаем серое подчеркивание поля ввода в красное
-    inputElement.classList.add(this._config.inputErrorClass);
+    // Превращаем серое подчеркивание поля ввода в красное
+    inputElement.classList.add(this._inputErrorClass);
   }
 
-  //Метод, который удаляет классы со стилями ошибок и удаляет тексты ошибок (АН)
+  // Метод, который удаляет классы со стилями ошибок и удаляет тексты ошибок (АН)
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    errorElement.classList.remove(this._config.errorClass);
+    errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
-    inputElement.classList.remove(this._config.inputErrorClass);
+    inputElement.classList.remove(this._inputErrorClass);
   }
   
-  //Метод, который проверяет валидность поля (АН)
+  // Метод, который проверяет валидность поля (АН)
   _checkInputValidity(inputElement) {
     //console.log(inputElement)
     if (inputElement.validity.valid) {
@@ -72,9 +78,9 @@ class FormValidator {
   /***************** Все обработчики в одном месте *****************/
   _setEventListeners() {
     // Получаем массив всех полей ввода (popup__input)
-    const inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     // Получаем кнопку Submit из конфига
-    const buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+    const buttonElement = this._formElement.querySelector(this._buttonElement);
 
     // При сбрасывании полей кнопку блокировать
     this._formElement.addEventListener('reset', () => this._lockButtonState(buttonElement, true));
