@@ -29,19 +29,19 @@ class FormValidator {
   }
 
   // Метод, который удаляет классы со стилями ошибок и удаляет тексты ошибок (АН)
-  _hideInputError(inputElement) {
+  hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
     inputElement.classList.remove(this._inputErrorClass);
   }
-  
+
   // Метод, который проверяет валидность поля (АН)
   _checkInputValidity(inputElement) {
     //console.log(inputElement)
     if (inputElement.validity.valid) {
       //Если поле валидно, сработает функция hideInputError, которая удалит класс с ошибкой
-      this._hideInputError(inputElement);
+      this.hideInputError(inputElement);
     } else {
       //Если поле невалидно, сработает функция showInputError, которая добавит класс с ошибкой
       this._showInputError(inputElement);

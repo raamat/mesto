@@ -44,11 +44,9 @@ function editProfile() {
 
   openPopup(popupEditProfile);
 
-  // Проверяем валидность полей после открытия формы и делаем кнопку "Сохранить" активной
-  // setButtonState(popupEditProfile);
-
-  // Удаляем стили и тексты ошибок, которые могут остаться после закрытия формы
-  // clearInputError(popupEditProfile);
+  // Очищаем поля ввода от ошибок
+  formEditValidation.hideInputError(popupInputName);
+  formEditValidation.hideInputError(popupInputJob);
 }
 
 // Универсальная функция закрытия модального окна
@@ -61,7 +59,7 @@ function closePopup(popup) {
 
 // Сохранение данных из формы редактирования профиля
 function submitEditProfileForm(event) {
-  /*Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
+  /* Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
   мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
   event.preventDefault();
 
@@ -95,7 +93,7 @@ function createCard(obj, template) {
   return cardElement;
 }
 
-// Вставляем карточку в DOM
+// Добавление карточки в DOM
 function addCard(event) {
   event.preventDefault();
   const data = new Object;
@@ -114,14 +112,12 @@ initialCards.forEach((item) => {
 })
 
 // Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
-function openCardForm(event) {
+function openCardForm() {
   openPopup(popupAddCard);
-
-  // Проверяем валидность полей при открытии формы
-  // setButtonState(popupAddCard);
-
-  // Удаляем стили и тексты ошибок
-  // clearInputError(popupAddCard);
+  
+  // Очищаем поля ввода от ошибок
+  formAddValidation.hideInputError(popupInputPlace);
+  formAddValidation.hideInputError(popupInputLink);
   
   // Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
@@ -146,17 +142,10 @@ formEditProfile.addEventListener('submit', submitEditProfileForm);
 // Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', editProfile);
 
-// В одном цикле подвешиваем два слушателя
+// Подвешиваем слушатели клика по popup и на крестик на каждый popup
 popupsList.forEach((popup) => {
-  // Подвешиваем слушатель события клик по кнопке "Закрыть" на каждое окно
-  const closeButton = popup.querySelector('.popup__close-button');
-  closeButton.addEventListener('click', () => {
-    closePopup(popup);
-  });
-  
-  // Подвешиваем слушатель клика по popup на каждый popup
   popup.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) {
+    if (event.target === event.currentTarget || event.target.classList.contains('popup__close-button')) {
       closePopup(popup);
     }
   });
