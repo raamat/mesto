@@ -1,5 +1,3 @@
-import { validationConfig } from "./constants.js";
-
 class FormValidator {
   constructor (config, formElement) {
     // В методах за объектом настроек следует обращаться к полю класса,
@@ -13,7 +11,7 @@ class FormValidator {
     this._formElement = formElement;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-
+    console.log(this._buttonElement)
   }
 
   // Метод (является свойством объекта), который добавляет классы с ошибками и выводит текст ошибки (АН)
@@ -83,13 +81,13 @@ class FormValidator {
     // При сбрасывании полей кнопку блокировать
     this._formElement.addEventListener('reset', () => this._lockButtonState(true));
 
-    this._toggleButtonState(this._buttonElement);
+    this._toggleButtonState();
     
     // На каждое поле ввода навешиваем обработчик на событие 'input'
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(this._buttonElement);
+        this._toggleButtonState();
       })
     })
   }
