@@ -11,7 +11,6 @@ class FormValidator {
     this._formElement = formElement;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-    console.log(this._buttonElement)
   }
 
   // Метод (является свойством объекта), который добавляет классы с ошибками и выводит текст ошибки (АН)
@@ -72,7 +71,7 @@ class FormValidator {
   /* Переключатель доступности кнопки - disabled = true/false
   Метод hasInvalidInput возваращает true или false */
   _toggleButtonState() {
-    this._lockButtonState(this._hasInvalidInput(this._inputList));  
+    this._lockButtonState(this._hasInvalidInput());  
   }
       
   /***************** Все обработчики в одном месте *****************/
