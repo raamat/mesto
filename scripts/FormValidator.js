@@ -6,10 +6,14 @@ class FormValidator {
     // а не передавать его в каждый метод, как это было реализовано ранее.
     this._config = config;
     this._inputSelector = config.inputSelector;
-    this._buttonElement = config.submitButtonSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
+    
     this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+
   }
 
   // Метод (является свойством объекта), который добавляет классы с ошибками и выводит текст ошибки (АН)
@@ -52,44 +56,40 @@ class FormValidator {
   Метод some проверяет, есть ли в массиве хотя бы один элемент, который соответствует определённому правилу. 
   Колбэк с этим правилом проверяет каждый элемент и возвращает true или false.
   При помощи метода some пройдем по массиву, чтобы найти невалидный input (АН, Т) */
-  _hasInvalidInput = (inputList) => {
+  _hasInvalidInput = () => {
     // Проходим по массиву полей методом some
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       // Если поле невалидно, колбэк вернёт true
       // Обход массива прекратится и вся функция
       // hasInvalidInput вернёт true
       return !inputElement.validity.valid;
     })
   };
-
+  
   // false - разблокировать кнопку "Submit"; true - заблокировать кнопку "Submit"
-  _lockButtonState(buttonElement, is) {
-    buttonElement.disabled = is;
+  _lockButtonState(is) {
+    this._buttonElement.disabled = is;
   }
 
   /* Переключатель доступности кнопки - disabled = true/false
   Метод hasInvalidInput возваращает true или false */
-  _toggleButtonState(inputList, buttonElement) {
-    this._lockButtonState(buttonElement, this._hasInvalidInput(inputList));  
+  _toggleButtonState() {
+    this._lockButtonState(this._hasInvalidInput(this._inputList));  
   }
       
   /***************** Все обработчики в одном месте *****************/
   _setEventListeners() {
-    // Получаем массив всех полей ввода (popup__input)
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    // Получаем кнопку Submit из конфига
-    const buttonElement = this._formElement.querySelector(this._buttonElement);
 
     // При сбрасывании полей кнопку блокировать
-    this._formElement.addEventListener('reset', () => this._lockButtonState(buttonElement, true));
+    this._formElement.addEventListener('reset', () => this._lockButtonState(true));
 
-    this._toggleButtonState(inputList, buttonElement);
+    this._toggleButtonState(this._buttonElement);
     
     // На каждое поле ввода навешиваем обработчик на событие 'input'
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(this._buttonElement);
       })
     })
   }
