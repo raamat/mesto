@@ -1,6 +1,6 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import { validationConfig, initialCards } from './constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import { validationConfig, initialCards } from '../utils/constants.js';
 export { zoomPhoto };
 
 const profileTitle = document.querySelector('.profile__title');

@@ -1,4 +1,4 @@
-import { zoomPhoto } from './index.js';
+import { zoomPhoto } from '../pages/index.js';
 
 class Card {
   /* Подготовка класса к масштабированию:
