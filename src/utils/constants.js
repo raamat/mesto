@@ -1,5 +1,5 @@
 //Объект с конфигом валидации
-const validationConfig = {
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-button',
@@ -9,7 +9,7 @@ const validationConfig = {
  };
 
 //При загрузке на странице должно быть 6 карточек, которые добавит JavaScript из массива initialCards
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -35,5 +35,3 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-export { validationConfig, initialCards };
