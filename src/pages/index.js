@@ -31,12 +31,15 @@ const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 /**************************************************************************************************************/
 
 // Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
+/*
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   
   // Добавляем слушатель событий для функции closePopupEsc, закрывающей модальное окно по нажатию на Esc
   document.addEventListener('keydown', closePopupEsc);
 }
+
+*/
 
 // Функция открытия модального окна редактирования профиля
 function editProfile() {
@@ -73,13 +76,14 @@ function submitEditProfileForm(event) {
 }
 
 // Функция закрытия модального окна при нажатии Esc
+/* 01.03.2023
 function closePopupEsc(event) {
   if (event.key ==='Escape') {
     // Вызываем функцию closePopup для открытого модального окна, т.е. с модификатором 'popup_opened'
     closePopup(document.querySelector('.popup_opened'));
   }
 }
-
+*/
 // Включение валидации форм
 const formAddValidation = new FormValidator(validationConfig, formAddCard);
 formAddValidation.enableValidation();
@@ -115,6 +119,7 @@ initialCards.forEach((item) => {
 })
 
 // Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
+/*
 function openCardForm() {
   openPopup(popupAddCard);
   
@@ -125,9 +130,9 @@ function openCardForm() {
   // Очищаем поля ввода формы "Новое место"
   formAddCard.reset();
 }
-
+*/
 // Функция увеличения картинок
- 
+
 function zoomPhoto(src, caption) {
   popupPhoto.src = src;
   popupPhoto.alt = caption;
@@ -156,15 +161,15 @@ popupsList.forEach((popup) => {
 });
 */
 // Слушатель события клик по кнопке "Добавить" карточку
-profileAddButton.addEventListener('click', openCardForm);
+//profileAddButton.addEventListener('click', openCardForm);
 
 // Слушатель события по кнопке "Создать" карточку
-formAddCard.addEventListener('submit', addCard);
+//formAddCard.addEventListener('submit', addCard);
 
 /*********************** класс Popup ***********************/
-const openProfile = new Popup(popupEditProfile);
-const openAdd = new Popup(popupAddCard);
-const openPhoto = new Popup(popupZoomPhoto);
+const openProfile = new Popup('.popup_type_edit-profile');
+const openAdd = new Popup('.popup_type_add-card');
+//const openPhoto = new Popup('.popup_type_zoom-photo');
 
 // Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', openProfile.open);

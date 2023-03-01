@@ -7,27 +7,31 @@
 
 export default class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector;
-  }
-
-  open = () => {
-    this._popupSelector.classList.add('popup_opened');
-    // Цепляем обработчик при отрытии попапа
+    this._popupElement = document.querySelector(popupSelector);
     this.setEventListeners();
+  }
+  
+  open = () => {
+    this._popupElement.classList.add('popup_opened');
   }
 
   close = () => {
-    this._popupSelector.classList.remove('popup_opened');
+    this._popupElement.classList.remove('popup_opened');
   }
 
   _handleEscClose = (event) => {
     if (event.key === 'Escape') {
       this.close();
-      console.log('Нажата кнопка ESC')
     }
   }
 
-  setEventListeners() {
-    this._popupSelector.querySelector('.popup__close-button').addEventListener('click', this.close);
+  setEventListeners() { 
+    document.addEventListener('keydown', this._handleEscClose);
+
+    this._popupElement.addEventListener('click', (event) => {
+      if (event.target === event.currentTarget || event.target.classList.contains('popup__close-button')) {
+        this.close();
+      }
+    });
   }
 }
