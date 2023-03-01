@@ -1,5 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Popup from '../components/Popup.js';
 import { validationConfig, initialCards } from '../utils/constants.js';
 export { zoomPhoto };
 
@@ -50,12 +51,14 @@ function editProfile() {
 }
 
 // Универсальная функция закрытия модального окна
+/* 01.03.2023
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
   //Удаляем слушатель Esc
   document.removeEventListener('keydown', closePopupEsc);
 }
+*/
 
 // Сохранение данных из формы редактирования профиля
 function submitEditProfileForm(event) {
@@ -140,9 +143,10 @@ function zoomPhoto(src, caption) {
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 
 // Слушатель события клик по кнопке "Редактировать"
-profileEditButton.addEventListener('click', editProfile);
+//profileEditButton.addEventListener('click', editProfile);
 
 // Подвешиваем слушатели клика по popup и на крестик на каждый popup
+/*
 popupsList.forEach((popup) => {
   popup.addEventListener('click', (event) => {
     if (event.target === event.currentTarget || event.target.classList.contains('popup__close-button')) {
@@ -150,10 +154,22 @@ popupsList.forEach((popup) => {
     }
   });
 });
-
+*/
 // Слушатель события клик по кнопке "Добавить" карточку
 profileAddButton.addEventListener('click', openCardForm);
 
 // Слушатель события по кнопке "Создать" карточку
 formAddCard.addEventListener('submit', addCard);
 
+/*********************** класс Popup ***********************/
+const openProfile = new Popup(popupEditProfile);
+const openAdd = new Popup(popupAddCard);
+const openPhoto = new Popup(popupZoomPhoto);
+
+// Слушатель события клик по кнопке "Редактировать"
+profileEditButton.addEventListener('click', openProfile.open);
+
+// Слушатель события клик по кнопке "Добавить" карточку
+profileAddButton.addEventListener('click', openAdd.open);
+
+//openProfile.setEventListeners();
