@@ -11,7 +11,6 @@ export default class PopupWithImage extends Popup {
   }
 
   open = (src, alt) => {
-    console.log('Сработал метод open');
     document.querySelector('.popup__photo').src = src;
     document.querySelector('.popup__photo').alt = alt;
     document.querySelector('.popup__photo-caption').textContent = alt;
