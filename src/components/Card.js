@@ -1,4 +1,6 @@
-import { zoomPhoto } from '../pages/index.js';
+//import { zoomPhoto } from '../pages/index.js';
+//02.03.2023
+import PopupWithImage from './PopupWithImage.js';
 
 class Card {
   /* Подготовка класса к масштабированию:
@@ -9,6 +11,8 @@ class Card {
     this._link = data.link;
     this._name = data.name;
     this._templateSelector = templateSelector; // записали селектор в приватное поле
+    //02.03.2023
+    this._zoomPhoto = new PopupWithImage('.popup_type_zoom-photo');
   }
 
   /* Метод для получения разметки:
@@ -73,7 +77,10 @@ class Card {
 
     // Слушатель увеличения картинки
     this._cardPhoto.addEventListener('click', () => {
-      zoomPhoto(this._link, this._name);
+      //zoomPhoto(this._link, this._name);
+      //02.03.2023
+      console.log('Прощел щелчок по картинке');
+      this._zoomPhoto.open(this._link, this._name);
     })
    
     // Удаление карточки

@@ -1,8 +1,10 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import Popup from '../components/Popup.js';
 import { validationConfig, initialCards } from '../utils/constants.js';
-export { zoomPhoto };
+//export { zoomPhoto };
+
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -132,7 +134,7 @@ function openCardForm() {
 }
 */
 // Функция увеличения картинок
-
+/* 02.03.2023
 function zoomPhoto(src, caption) {
   popupPhoto.src = src;
   popupPhoto.alt = caption;
@@ -140,7 +142,7 @@ function zoomPhoto(src, caption) {
   popupPhotoCaption.textContent = caption;
   openPopup(popupZoomPhoto);
 }
-
+*/
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
 
@@ -169,7 +171,7 @@ popupsList.forEach((popup) => {
 /*********************** класс Popup ***********************/
 const openProfile = new Popup('.popup_type_edit-profile');
 const openAdd = new Popup('.popup_type_add-card');
-//const openPhoto = new Popup('.popup_type_zoom-photo');
+const openPhoto = new PopupWithImage('.popup_type_zoom-photo');
 
 // Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', openProfile.open);
@@ -177,4 +179,4 @@ profileEditButton.addEventListener('click', openProfile.open);
 // Слушатель события клик по кнопке "Добавить" карточку
 profileAddButton.addEventListener('click', openAdd.open);
 
-//openProfile.setEventListeners();
+openPhoto.open
