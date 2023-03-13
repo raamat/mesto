@@ -1,5 +1,3 @@
-//import { zoomPhoto } from '../pages/index.js';
-//02.03.2023
 import PopupWithImage from './PopupWithImage.js';
 
 class Card {
@@ -7,12 +5,11 @@ class Card {
   1) передаем данные в конструктор в виде объекта
   2) делаем селектор частью конструктора класса - класс станет универсальным: 
   он научится создавать карточки в разных стилях в зависимости от модификатора */
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, clickHandler) {
     this._link = data.link;
     this._name = data.name;
     this._templateSelector = templateSelector; // записали селектор в приватное поле
-    //02.03.2023
-    this._zoomPhoto = new PopupWithImage('.popup_type_zoom-photo');
+    this._clickHandler = clickHandler;
   }
 
   /* Метод для получения разметки:
@@ -78,9 +75,8 @@ class Card {
     // Слушатель увеличения картинки
     this._cardPhoto.addEventListener('click', () => {
       //zoomPhoto(this._link, this._name);
-      //02.03.2023
-      console.log('Прощел щелчок по картинке');
-      this._zoomPhoto.open(this._link, this._name);
+      //13.03.2023
+      this._clickHandler(this._link, this._name);
     })
    
     // Удаление карточки

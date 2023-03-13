@@ -1,33 +1,24 @@
+import { 
+  profileTitle,
+  profileSubtitle,
+  profileEditButton,
+  popupInputName,
+  popupInputJob,
+  formEditProfile,
+  popupEditProfile,
+  cardsList,
+  profileAddButton,
+  formAddCard,
+  validationConfig, 
+  initialCards } from '../utils/constants.js';
+
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import { validationConfig, initialCards } from '../utils/constants.js';
-//export { zoomPhoto };
-
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-const profileEditButton = document.querySelector('.profile__edit-button');
+//import './index.css';
 
-//Коллекция со всеми модальными окнами
-const popupsList = document.querySelectorAll('.popup');
-
-const popupInputName = document.querySelector('.popup__input_type_name');
-const popupInputJob = document.querySelector('.popup__input_type_job');
-const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
-const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-
-const cardsList = document.querySelector('.cards__list');
-const profileAddButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_type_add-card');
-const popupInputPlace = document.querySelector('.popup__input_type_place');
-const popupInputLink = document.querySelector('.popup__input_type_link');
-const formAddCard = document.querySelector('.popup__form_type_add-card');
-
-const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
-const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
-const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
@@ -44,6 +35,7 @@ function openPopup(popup) {
 */
 
 // Функция открытия модального окна редактирования профиля
+/* 13.03.2023
 function editProfile() {
   popupInputName.value = profileTitle.textContent;
   popupInputJob.value = profileSubtitle.textContent;
@@ -54,7 +46,7 @@ function editProfile() {
   formEditValidation.hideInputError(popupInputName);
   formEditValidation.hideInputError(popupInputJob);
 }
-
+*/
 // Универсальная функция закрытия модального окна
 /* 01.03.2023
 function closePopup(popup) {
@@ -97,12 +89,15 @@ formEditValidation.enableValidation();
 
 // Функция создания карточки
 function createCard(obj, template) {
-  const card = new Card(obj, template);
+  const card = new Card(obj, template, (link, name) => {
+    openPhoto.open(link, name);
+  });
   const cardElement = card.generateCard();
   return cardElement;
 }
 
 // Добавление карточки в DOM
+/* 13.03.2023
 function addCard(event) {
   event.preventDefault();
   const data = new Object;
@@ -113,7 +108,7 @@ function addCard(event) {
 
   closePopup(popupAddCard);
 }
-
+*/
 // Проходим по массиву initialCards с объектами и публикуем 6 карточек
 initialCards.forEach((item) => {
   // Добавляем в DOM элемент массива
@@ -174,9 +169,7 @@ const openAdd = new Popup('.popup_type_add-card');
 const openPhoto = new PopupWithImage('.popup_type_zoom-photo');
 
 // Слушатель события клик по кнопке "Редактировать"
-profileEditButton.addEventListener('click', openProfile.open);
+profileEditButton.addEventListener('click', () => {openProfile.open()});
 
 // Слушатель события клик по кнопке "Добавить" карточку
-profileAddButton.addEventListener('click', openAdd.open);
-
-openPhoto.open
+profileAddButton.addEventListener('click', () => {openAdd.open()});

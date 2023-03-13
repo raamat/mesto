@@ -11,11 +11,11 @@ export default class Popup {
     this.setEventListeners();
   }
   
-  open = () => {
+  open() {
     this._popupElement.classList.add('popup_opened');
   }
 
-  close = () => {
+  close() {
     this._popupElement.classList.remove('popup_opened');
   }
 
