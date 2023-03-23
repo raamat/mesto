@@ -16,6 +16,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
 //import './index.css';
 
@@ -58,9 +59,10 @@ function closePopup(popup) {
 */
 
 // Сохранение данных из формы редактирования профиля
+
 function submitEditProfileForm(event) {
-  /* Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
-  мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms */
+  //Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
+  //мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms
   event.preventDefault();
 
   profileTitle.textContent = popupInputName.value;
@@ -167,6 +169,14 @@ popupsList.forEach((popup) => {
 const openProfile = new Popup('.popup_type_edit-profile');
 const openAdd = new Popup('.popup_type_add-card');
 const openPhoto = new PopupWithImage('.popup_type_zoom-photo');
+const profileInfo = new UserInfo({
+  profileTitleSelector: '.profile__title',
+  profileSubtitleSelector: '.profile__subtitle'
+});
+
+console.log(profileInfo._profileTitle)
+console.log(profileInfo._profileSubtitle)
+profileInfo.getUserInfo()
 
 // Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', () => {openProfile.open()});
