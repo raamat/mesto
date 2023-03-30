@@ -183,3 +183,6 @@ profileEditButton.addEventListener('click', () => {openProfile.open()});
 
 // Слушатель события клик по кнопке "Добавить" карточку
 profileAddButton.addEventListener('click', () => {openAdd.open()});
+
+
+
