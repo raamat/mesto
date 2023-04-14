@@ -5,7 +5,8 @@ export const popupInputName = document.querySelector('.popup__input_type_name');
 export const popupInputJob = document.querySelector('.popup__input_type_job');
 export const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-export const cardsList = document.querySelector('.cards__list');
+export const cardsListElement = document.querySelector('.cards__list');
+export const cardsListSelector = '.cards__list';
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const formAddCard = document.querySelector('.popup__form_type_add-card');
 

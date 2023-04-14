@@ -6,7 +6,8 @@ import {
   popupInputJob,
   formEditProfile,
   popupEditProfile,
-  cardsList,
+  cardsListElement,
+  cardsListSelector,
   profileAddButton,
   formAddCard,
   validationConfig, 
@@ -14,8 +15,10 @@ import {
 
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
 //import './index.css';
@@ -58,19 +61,6 @@ function closePopup(popup) {
 }
 */
 
-// Сохранение данных из формы редактирования профиля
-
-function submitEditProfileForm(event) {
-  //Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
-  //мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms
-  event.preventDefault();
-
-  profileTitle.textContent = popupInputName.value;
-  profileSubtitle.textContent = popupInputJob.value;
-  
-  closePopup(popupEditProfile);
-}
-
 // Функция закрытия модального окна при нажатии Esc
 /* 01.03.2023
 function closePopupEsc(event) {
@@ -80,7 +70,8 @@ function closePopupEsc(event) {
   }
 }
 */
-// Включение валидации форм
+// 1) Создаем экземпляры классов для каждой формы
+// 2) Включаем валидацию форм - вызываем публичный метод enableValidation()
 const formAddValidation = new FormValidator(validationConfig, formAddCard);
 formAddValidation.enableValidation();
 
@@ -89,10 +80,19 @@ formEditValidation.enableValidation();
 
 /**************************************** Работа с карточками ***************************************/
 
+const cardList = new Section({
+    item: initialCards,
+    renderer: (cardItem) => {
+      // инструкция по работе с Card, либо другая
+    }
+  },
+  cardsListSelector   
+)
+
 // Функция создания карточки
 function createCard(obj, template) {
   const card = new Card(obj, template, (link, name) => {
-    openPhoto.open(link, name);
+    showPopupPhoto.open(link, name);
   });
   const cardElement = card.generateCard();
   return cardElement;
@@ -111,11 +111,17 @@ function addCard(event) {
   closePopup(popupAddCard);
 }
 */
+
+
 // Проходим по массиву initialCards с объектами и публикуем 6 карточек
 initialCards.forEach((item) => {
   // Добавляем в DOM элемент массива
-  cardsList.append(createCard(item, '#card-template'));
+  cardsListElement.append(createCard(item, '#card-template'));
 })
+
+
+
+
 
 // Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 /*
@@ -143,8 +149,7 @@ function zoomPhoto(src, caption) {
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
 
-// Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit
-formEditProfile.addEventListener('submit', submitEditProfileForm);
+
 
 // Слушатель события клик по кнопке "Редактировать"
 //profileEditButton.addEventListener('click', editProfile);
@@ -166,23 +171,46 @@ popupsList.forEach((popup) => {
 //formAddCard.addEventListener('submit', addCard);
 
 /*********************** класс Popup ***********************/
-const openProfile = new Popup('.popup_type_edit-profile');
-const openAdd = new Popup('.popup_type_add-card');
-const openPhoto = new PopupWithImage('.popup_type_zoom-photo');
-const profileInfo = new UserInfo({
+
+//const showPopupCard = new Popup('.popup_type_add-card');
+const showPopupPhoto = new PopupWithImage('.popup_type_zoom-photo');
+const profileUserInfo = new UserInfo({
   profileTitleSelector: '.profile__title',
   profileSubtitleSelector: '.profile__subtitle'
 });
 
-console.log(profileInfo._profileTitle)
-console.log(profileInfo._profileSubtitle)
-profileInfo.getUserInfo()
 
-// Слушатель события клик по кнопке "Редактировать"
-profileEditButton.addEventListener('click', () => {openProfile.open()});
 
 // Слушатель события клик по кнопке "Добавить" карточку
-profileAddButton.addEventListener('click', () => {openAdd.open()});
+profileAddButton.addEventListener('click', () => {showPopupCard.open()});
+
+/************************ Попапы с формой **************************/
+/*******************************************************************/
+
+const showPopupProfile = new PopupWithForm('.popup_type_edit-profile', handleFormEditSubmit);
+//console.log(showPopupProfile)
+
+// Слушатель события клик по кнопке "Редактировать"
+profileEditButton.addEventListener('click', () => {
+  showPopupProfile.open();
+  // Получаем объект с полями name и job
+  const inputs = profileUserInfo.getUserInfo();
+  //console.log(inputs);
+  // Вставляем значения в инпуты формы
+  popupInputName.value = inputs.name;
+  popupInputJob.value = inputs.job;
+});
 
 
+// Сохранение данных из формы редактирования профиля
+function handleFormEditSubmit(inputValues) {
+  //11.04.2023
+  //profileTitle.textContent = popupInputName.value;
+  //profileSubtitle.textContent = popupInputJob.value;
+  profileUserInfo.setUserInfo(inputValues);
+  
+  //11.04.2023
+  //closePopup(popupEditProfile);
+  showPopupProfile.close();
+}
 

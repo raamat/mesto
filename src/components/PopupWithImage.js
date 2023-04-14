@@ -8,15 +8,17 @@ import Popup from "./Popup.js";
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._popupPhotoElement = this._popupElement.querySelector('.popup__photo');
-    this._popupCaptionElement = this._popupElement.querySelector('.popup__photo-caption');
+    this._popupPhoto = this._popup.querySelector('.popup__photo');
+    this._popupPhotoCaption = this._popup.querySelector('.popup__photo-caption');
   }
 
   open = (src, alt) => {
-    this._popupPhotoElement.src = src;
-    this._popupPhotoElement.alt = alt;
-    this._popupCaptionElement.textContent = alt;
+    this._popupPhoto.src = src;
+    this._popupPhoto.alt = alt;
+    this._popupPhotoCaption.textContent = alt;
 
+    // Вызываем функцию open родительского класса Popup,
+    // котороя делает выдимым попап с картинкой
     super.open();
   }
 }
