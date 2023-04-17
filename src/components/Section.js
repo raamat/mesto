@@ -35,16 +35,15 @@ export default class Section {
   
   // Публичный метод, который отвечает за отрисовку всех элементов. 
   // Отрисовка каждого отдельного элемента должна осуществляться функцией `renderer`
-  rendererItems() {
+  renderItems() {
     // Перебираем массив данных _initialArray (данные 6-ти карточек из массива initialCards)
-    // Вызывает для каждого элемента массива метод addItem.
     this._initialArray.forEach(item => this._renderer(item));  
   };
   
   // Публичный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер
   // Вся логика отрисовки элемента находится в методе addItem
   addItem(element) {
-    this._container.append(element, 'OK'); 
+    this._container.append(element); 
   }
 
   // Метод удаляет всё содержимое поля _container

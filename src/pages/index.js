@@ -21,9 +21,6 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
-//import './index.css';
-
-
 /*********************************************** Функции ******************************************************/
 /**************************************************************************************************************/
 
@@ -79,15 +76,18 @@ const formEditValidation = new FormValidator(validationConfig, formEditProfile);
 formEditValidation.enableValidation();
 
 /**************************************** Работа с карточками ***************************************/
-
-const cardList = new Section({
-    item: initialCards,
+const cardsList = new Section({
+    items: initialCards,
     renderer: (cardItem) => {
       // инструкция по работе с Card, либо другая
+      cardsList.addItem(createCard(cardItem, '#card-template'));
     }
   },
-  cardsListSelector   
+  '.cards__list'
 )
+
+// Вызываем метод чтобы пройти по массиву и отрисовать 6 карточек
+cardsList.renderItems();
 
 // Функция создания карточки
 function createCard(obj, template) {
@@ -97,6 +97,8 @@ function createCard(obj, template) {
   const cardElement = card.generateCard();
   return cardElement;
 }
+
+//cardList.addItem(createCard(initialCards, '#card-template'))
 
 // Добавление карточки в DOM
 /* 13.03.2023
@@ -114,10 +116,12 @@ function addCard(event) {
 
 
 // Проходим по массиву initialCards с объектами и публикуем 6 карточек
-initialCards.forEach((item) => {
+//initialCards.forEach((item) => {
   // Добавляем в DOM элемент массива
-  cardsListElement.append(createCard(item, '#card-template'));
-})
+  //15.04.2023
+  //cardsListElement.append(createCard(item, '#card-template'));
+  //cardList.addItem(createCard(item, ))
+//})
 
 
 
@@ -164,7 +168,7 @@ popupsList.forEach((popup) => {
   });
 });
 */
-// Слушатель события клик по кнопке "Добавить" карточку
+//Слушатель события клик по кнопке "Добавить" карточку
 //profileAddButton.addEventListener('click', openCardForm);
 
 // Слушатель события по кнопке "Создать" карточку
@@ -179,8 +183,6 @@ const profileUserInfo = new UserInfo({
   profileSubtitleSelector: '.profile__subtitle'
 });
 
-
-
 // Слушатель события клик по кнопке "Добавить" карточку
 profileAddButton.addEventListener('click', () => {showPopupCard.open()});
 
@@ -188,7 +190,6 @@ profileAddButton.addEventListener('click', () => {showPopupCard.open()});
 /*******************************************************************/
 
 const showPopupProfile = new PopupWithForm('.popup_type_edit-profile', handleFormEditSubmit);
-//console.log(showPopupProfile)
 
 // Слушатель события клик по кнопке "Редактировать"
 profileEditButton.addEventListener('click', () => {
@@ -214,3 +215,9 @@ function handleFormEditSubmit(inputValues) {
   showPopupProfile.close();
 }
 
+
+const showPopupCard = new PopupWithForm('.popup_type_add-card', handleFormAddCardSubmit);
+
+function handleFormAddCardSubmit() {
+  showPopupCard.close();
+}
