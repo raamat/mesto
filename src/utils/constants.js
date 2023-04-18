@@ -5,18 +5,8 @@ export const popupInputName = document.querySelector('.popup__input_type_name');
 export const popupInputJob = document.querySelector('.popup__input_type_job');
 export const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-export const cardsListElement = document.querySelector('.cards__list');
-export const cardsListSelector = '.cards__list';
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const formAddCard = document.querySelector('.popup__form_type_add-card');
-
-//const popupsList = document.querySelectorAll('.popup');
-//const popupAddCard = document.querySelector('.popup_type_add-card');
-//const popupInputPlace = document.querySelector('.popup__input_type_place');
-//const popupInputLink = document.querySelector('.popup__input_type_link');
-//const popupZoomPhoto = document.querySelector('.popup_type_zoom-photo');
-//const popupPhoto = popupZoomPhoto.querySelector('.popup__photo');
-//const popupPhotoCaption = popupZoomPhoto.querySelector('.popup__photo-caption');
 
 //Объект с конфигом валидации
 export const validationConfig = {

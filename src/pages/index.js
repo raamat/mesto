@@ -1,13 +1,8 @@
 import { 
-  profileTitle,
-  profileSubtitle,
   profileEditButton,
   popupInputName,
   popupInputJob,
   formEditProfile,
-  popupEditProfile,
-  cardsListElement,
-  cardsListSelector,
   profileAddButton,
   formAddCard,
   validationConfig, 
@@ -16,13 +11,101 @@ import {
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+/**
+ * Функция создания карточки
+ * @param {{ link:string, name:string }} obj 
+ * @returns {HTMLElement}
+ */
+function createCard(obj) {
+  const card = new Card(obj, '#card-template', (link, name) => {
+    showPopupPhoto.open(link, name);
+  });
+  const cardElement = card.generateCard();
+  return cardElement;
+}
 
-/*********************************************** Функции ******************************************************/
-/**************************************************************************************************************/
+
+// Класс `Section` который отвечает за отрисовку элементов на странице
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (cardItem) => {
+      // инструкция по работе с Card, либо другая
+      cardsList.addItem(createCard(cardItem));
+    }
+  },
+  '.cards__list'
+)
+// Вызываем метод чтобы пройти по массиву и отрисовать 6 карточек
+cardsList.renderItems();
+
+
+// Создание попапа с картинкой
+const showPopupPhoto = new PopupWithImage('.popup_type_zoom-photo');
+const profileUserInfo = new UserInfo({
+  profileTitleSelector: '.profile__title',
+  profileSubtitleSelector: '.profile__subtitle'
+});
+
+
+// Включаем валидацию форм - вызываем публичный метод enableValidation
+const formAddValidation = new FormValidator(validationConfig, formAddCard);
+formAddValidation.enableValidation();
+
+const formEditValidation = new FormValidator(validationConfig, formEditProfile);
+formEditValidation.enableValidation();
+
+
+// Сохранение данных из формы редактирования профиля
+/**
+ * В обработчик в качестве аргрумента передаем объект с полями формы
+ * @param {{ name: string, job: string }} inputValues;
+ */
+function handleFormEditSubmit(inputValues) {
+  //11.04.2023
+  //profileTitle.textContent = popupInputName.value;
+  //profileSubtitle.textContent = popupInputJob.value;
+  profileUserInfo.setUserInfo(inputValues);
+  
+  //11.04.2023
+  //closePopup(popupEditProfile);
+  showPopupProfile.close();
+}
+
+const showPopupProfile = new PopupWithForm('.popup_type_edit-profile', handleFormEditSubmit);
+
+// Слушатель события клик по кнопке "Редактировать"
+profileEditButton.addEventListener('click', () => {
+  showPopupProfile.open();
+  // Получаем объект с полями name и job
+  const inputs = profileUserInfo.getUserInfo();
+  //console.log(inputs);
+  // Вставляем значения в инпуты формы
+  popupInputName.value = inputs.name;
+  popupInputJob.value = inputs.job;
+});
+
+
+/**
+ * В обработчик в качестве аргрумента передаем объект с полями формы
+ * @param {{ place: string, link: string }} inputValues;
+ */
+function handleFormAddCardSubmit({link, place}) {
+  cardsList.addItem(createCard({ name: place, link }), true);
+  showPopupCard.close();
+}
+
+/****************************** Добавление карточки *******************************/
+const showPopupCard = new PopupWithForm('.popup_type_add-card', handleFormAddCardSubmit);
+
+// Слушатель события клик по кнопке "Добавить" карточку
+profileAddButton.addEventListener('click', () => {showPopupCard.open()});
+
+
+
+
 
 // Универсальная функция открытия модального окна - становится видимым модальное окно за счет добавления класса popup_opened
 /*
@@ -69,34 +152,11 @@ function closePopupEsc(event) {
 */
 // 1) Создаем экземпляры классов для каждой формы
 // 2) Включаем валидацию форм - вызываем публичный метод enableValidation()
-const formAddValidation = new FormValidator(validationConfig, formAddCard);
-formAddValidation.enableValidation();
 
-const formEditValidation = new FormValidator(validationConfig, formEditProfile);
-formEditValidation.enableValidation();
 
 /**************************************** Работа с карточками ***************************************/
-const cardsList = new Section({
-    items: initialCards,
-    renderer: (cardItem) => {
-      // инструкция по работе с Card, либо другая
-      cardsList.addItem(createCard(cardItem, '#card-template'));
-    }
-  },
-  '.cards__list'
-)
 
-// Вызываем метод чтобы пройти по массиву и отрисовать 6 карточек
-cardsList.renderItems();
 
-// Функция создания карточки
-function createCard(obj, template) {
-  const card = new Card(obj, template, (link, name) => {
-    showPopupPhoto.open(link, name);
-  });
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
 //cardList.addItem(createCard(initialCards, '#card-template'))
 
@@ -114,7 +174,6 @@ function addCard(event) {
 }
 */
 
-
 // Проходим по массиву initialCards с объектами и публикуем 6 карточек
 //initialCards.forEach((item) => {
   // Добавляем в DOM элемент массива
@@ -122,10 +181,6 @@ function addCard(event) {
   //cardsListElement.append(createCard(item, '#card-template'));
   //cardList.addItem(createCard(item, ))
 //})
-
-
-
-
 
 // Функция открытия модального окна карточки - становится видимым модальное окно за счет добавления класса popup_opened
 /*
@@ -153,8 +208,6 @@ function zoomPhoto(src, caption) {
 /**************************************************** Слушатели вне функций **************************************************/
 /*****************************************************************************************************************************/
 
-
-
 // Слушатель события клик по кнопке "Редактировать"
 //profileEditButton.addEventListener('click', editProfile);
 
@@ -177,47 +230,7 @@ popupsList.forEach((popup) => {
 /*********************** класс Popup ***********************/
 
 //const showPopupCard = new Popup('.popup_type_add-card');
-const showPopupPhoto = new PopupWithImage('.popup_type_zoom-photo');
-const profileUserInfo = new UserInfo({
-  profileTitleSelector: '.profile__title',
-  profileSubtitleSelector: '.profile__subtitle'
-});
 
-// Слушатель события клик по кнопке "Добавить" карточку
-profileAddButton.addEventListener('click', () => {showPopupCard.open()});
 
 /************************ Попапы с формой **************************/
 /*******************************************************************/
-
-const showPopupProfile = new PopupWithForm('.popup_type_edit-profile', handleFormEditSubmit);
-
-// Слушатель события клик по кнопке "Редактировать"
-profileEditButton.addEventListener('click', () => {
-  showPopupProfile.open();
-  // Получаем объект с полями name и job
-  const inputs = profileUserInfo.getUserInfo();
-  //console.log(inputs);
-  // Вставляем значения в инпуты формы
-  popupInputName.value = inputs.name;
-  popupInputJob.value = inputs.job;
-});
-
-
-// Сохранение данных из формы редактирования профиля
-function handleFormEditSubmit(inputValues) {
-  //11.04.2023
-  //profileTitle.textContent = popupInputName.value;
-  //profileSubtitle.textContent = popupInputJob.value;
-  profileUserInfo.setUserInfo(inputValues);
-  
-  //11.04.2023
-  //closePopup(popupEditProfile);
-  showPopupProfile.close();
-}
-
-
-const showPopupCard = new PopupWithForm('.popup_type_add-card', handleFormAddCardSubmit);
-
-function handleFormAddCardSubmit() {
-  showPopupCard.close();
-}

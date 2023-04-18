@@ -27,15 +27,18 @@ export default class PopupWithForm extends Popup {
   
   // Метод собирает данные всех полей формы
   // P.S. Метод приватный и его нельзя использовать за пределами класса PopupWithForm,
-  // поэтому его надо передать как колбэк в this._handleFormSubmit();
+  // поэтому результат выполнения метода надо передать в колбэк в this._handleFormSubmit();
   _getInputValues() {
     // Создаем пустой объект для значений полей
-    this._inputValues = {};
+    const inputValues = {};
+    // Циклом проходимся по всем полям формы
     this._popupInputList.forEach((input) => {
-      this._inputValues[input.name] = input.value; 
+      // Берем атрибут name и сохраняем в именнованном массиве его значение
+      inputValues[input.name] = input.value; 
     })
     
-    return this._inputValues;
+    // На выходе получаем объект значениями полей
+    return inputValues;
   }
   
   // Перезаписываем родительский метод setEventListeners. 
@@ -44,7 +47,7 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     // Почему тут this._popup, а не this._popupForm?
-    // Почему this._popupForm = undefined?
+    // Потому что пока this._popupForm здесь еще undefined
     this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());

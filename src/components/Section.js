@@ -42,14 +42,15 @@ export default class Section {
   
   // Публичный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер
   // Вся логика отрисовки элемента находится в методе addItem
-  addItem(element) {
-    this._container.append(element); 
+  addItem(element, isPreppend = false) {
+    isPreppend
+    ? this._container.prepend(element)
+    : this._container.append(element);
   }
 
   // Метод удаляет всё содержимое поля _container
   clear() {
     this._container.innerHTML = '';
   }
-
 }
 
