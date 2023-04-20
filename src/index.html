@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Проект "Место" </title>
 </head>
 <body class="page">
@@ -14,7 +13,7 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/jacques-yves-cousteau.jpg" alt="Жак-Ив Кусто">
+        <img class="profile__avatar" src="<%=require('./images/jacques-yves-cousteau.jpg')%>" alt="Жак-Ив Кусто">
         <div class="profile__info">
           <div class="profile__title-block">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -77,6 +76,8 @@
       </div>
     </li>
   </template>
+  <!--
   <script type="module" src="pages/index.js"></script>
+  -->
 </body>
 </html>
