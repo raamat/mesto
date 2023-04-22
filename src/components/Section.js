@@ -26,22 +26,28 @@ export default class Section {
   // Свойство `items` — это массив данных, которые нужно добавить на страницу при инициализации класса. 
   // Свойство `renderer` — это функция, которая отвечает за создание и отрисовку данных на странице.
   // Второй параметр конструктора — селектор контейнера, в который нужно добавлять созданные элементы.
-  constructor({ items, renderer }, containerSelector) {
-    this._initialArray = items;
+  constructor({ renderer }, containerSelector) {
+    //this._initialArray = items;
     this._renderer = renderer; // renderer — функция-колбэк, инструкция
 
     this._container = document.querySelector(containerSelector);
   }
   
-  // Публичный метод, который отвечает за отрисовку всех элементов. 
+  // Публичный метод, который отвечает за отрисовку всех элементов (6 карточек из массива) 
   // Отрисовка каждого отдельного элемента должна осуществляться функцией `renderer`
-  renderItems() {
+  /* Лучше массив карточек передавать не как параметр конструктора, а как параметр метода renderItems. 
+  Это пригодится в следующем спринте, когда данные будут приходить с сервера и для их отображения 
+  можно будет вызвать cardsSection.renderItems(cards); передав полученные данные 
+  как параметр метода (ревью 1 ПР8)*/
+  // P.S. Массив с карточками передадим в метод прямо в index.js - cardsList.renderItems(initialCards);
+  renderItems(items) {
     // Перебираем массив данных _initialArray (данные 6-ти карточек из массива initialCards)
-    this._initialArray.forEach(item => this._renderer(item));  
+    items.forEach(item => this._renderer(item));  
   };
   
   // Публичный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер
   // Вся логика отрисовки элемента находится в методе addItem
+  // P.S. Метод предназначен для добавления одной карточки при сабмите
   addItem(element, isPreppend = false) {
     isPreppend
     ? this._container.prepend(element)

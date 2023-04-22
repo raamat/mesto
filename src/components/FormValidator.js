@@ -37,9 +37,14 @@ class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
   }
 
+  // Публичный метод, который очистит поля формы от ошибок.
+  // Вызывать данный метод можно при открытии попапа формы
+  clearInputsErrors() {
+    this._inputList.forEach(input => this.hideInputError(input));
+  }
+
   // Метод, который проверяет валидность поля (АН)
   _checkInputValidity(inputElement) {
-    //console.log(inputElement)
     if (inputElement.validity.valid) {
       //Если поле валидно, сработает функция hideInputError, которая удалит класс с ошибкой
       this.hideInputError(inputElement);

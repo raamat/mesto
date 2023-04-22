@@ -9,25 +9,30 @@ export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this.setEventListeners();
+    // Ниже привязываем контекст в конструкторе. Теперь можно смело 
+    // пользоваться this._handleEscClose где угодно напрямую, без боязни потери this
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
   
   open() {
     this._popup.classList.add('popup_opened');
+    // Добавляем обработчик ESC при открытии попап
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   close() {
     this._popup.classList.remove('popup_opened');
+    // Удаляем обработчик ESC при закрытии попап
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
-  _handleEscClose = (event) => {
+  _handleEscClose(event) {
     if (event.key === 'Escape') {
       this.close();
     }
   }
 
   setEventListeners() { 
-    document.addEventListener('keydown', this._handleEscClose);
-
     this._popup.addEventListener('click', (event) => {
       if (event.target === event.currentTarget || event.target.classList.contains('popup__close-button')) {
         this.close();

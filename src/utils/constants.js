@@ -1,10 +1,7 @@
-export const profileTitle = document.querySelector('.profile__title');
-export const profileSubtitle = document.querySelector('.profile__subtitle');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const popupInputName = document.querySelector('.popup__input_type_name');
 export const popupInputJob = document.querySelector('.popup__input_type_job');
 export const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
-export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const formAddCard = document.querySelector('.popup__form_type_add-card');
 

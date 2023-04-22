@@ -47,7 +47,7 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     // Почему тут this._popup, а не this._popupForm?
-    // Потому что пока this._popupForm здесь еще undefined
+    // Потому что пока this._popupForm здесь еще undefined, а так событие всплывает
     this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
