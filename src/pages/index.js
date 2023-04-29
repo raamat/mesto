@@ -5,8 +5,7 @@ import {
   formEditProfile,
   profileAddButton,
   formAddCard,
-  validationConfig, 
-  initialCards } from '../utils/constants.js';
+  validationConfig } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -14,6 +13,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import './index.css';
 
@@ -34,7 +34,6 @@ function handleCardClick(link, name) {
 
 // Класс `Section` который отвечает за отрисовку элементов на странице
 const cardsList = new Section({
-    //items: initialCards,
     renderer: (cardItem) => {
       // инструкция по работе с Card, либо другая
       cardsList.addItem(createCard(cardItem));
@@ -42,9 +41,47 @@ const cardsList = new Section({
   },
   '.cards__list'
 )
-// Вызываем метод чтобы пройти по массиву и отрисовать 6 карточек
-cardsList.renderItems(initialCards);
 
+/************************************************************** */
+// Пробная функция для получения карточек с сервера
+function getCardsServer() {
+  fetch('https://mesto.nomoreparties.co/v1/cohort-65/cards', {
+    headers: {
+      authorization: '0bc141f1-6053-416b-8022-646082ea4528'
+    }
+  })
+    .then(res => res.json())
+    .then((arrayCards) => {
+      cardsList.renderItems(arrayCards);
+    }); 
+}
+
+
+// Вызываем функцию чтобы пройти по массиву и отрисовать 6 карточек
+//cardsList.renderItems(initialCards);
+//getCardsServer();
+
+
+// Пробная функция Загрузка информации о пользователе с сервера
+function getUserServer() {
+  fetch('https://mesto.nomoreparties.co/v1/cohort-65/users/me', {
+    headers: {
+      authorization: '0bc141f1-6053-416b-8022-646082ea4528'
+    }
+  })
+    .then(res => res.json())
+    .then((userInfo) => {
+      document.querySelector('.profile__title').textContent = userInfo.name;
+      document.querySelector('.profile__subtitle').textContent = userInfo.about;
+      document.querySelector('.profile__avatar').src = userInfo.avatar;
+      document.querySelector('.profile__avatar').alt = userInfo.name;
+    }); 
+}
+
+// Вызываем функцию
+//getUserServer();
+
+/*****************************************************************/
 
 // Создание попапа с картинкой
 const showPopupPhoto = new PopupWithImage('.popup_type_zoom-photo');
@@ -110,3 +147,26 @@ function handleProfileAddButtonClick() {
   formAddValidation.clearInputsErrors();
   showPopupCard.open();  
 }
+
+/*********************************************************************************/
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  headers: {
+    authorization: '0bc141f1-6053-416b-8022-646082ea4528',
+    'Content-Type': 'application/json'
+  }
+});
+
+// Выдергиваем из промиса массив с карточками и публикуем методом 
+// renderItems класса Section
+api.getInitialCards()
+  .then(initialCards => cardsList.renderItems(initialCards))
+  .catch(err => console.log(err));
+
+// Получаем с сервера информацию о пользователе и добавляем ее в DOM
+// Используем метод setUserInfo класса Userinfo
+api.getUserInfoServer()
+  .then(userInfoServer => profileUserInfo.setUserInfo(userInfoServer))
+  .catch(err => console.log(err));
+

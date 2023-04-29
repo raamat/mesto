@@ -1,5 +1,3 @@
-import PopupWithImage from './PopupWithImage.js';
-
 class Card {
   /* Подготовка класса к масштабированию 
   (Спринт 8/14 → Тема 3/8: ООП в интерфейсах → Урок 4/8)
