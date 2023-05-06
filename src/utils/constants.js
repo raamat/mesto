@@ -1,3 +1,7 @@
+export const profileAvatar = document.querySelector('.profile__avatar');
+export const profileEditAvatarButton = document.querySelector('.profile__avatar-button');
+export const formAvatar = document.querySelector('.popup__form_type_avatar-profile');
+export const popupInputLinkAvatar = document.querySelector('.popup__input_type_link_avatar');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const popupInputName = document.querySelector('.popup__input_type_name');
 export const popupInputJob = document.querySelector('.popup__input_type_job');

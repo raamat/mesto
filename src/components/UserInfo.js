@@ -31,6 +31,8 @@ export default class UserInfo {
   // Вставляет новые данные из формы в HTML
   setUserInfo(userInfo) {
     this._profileTitle.textContent = userInfo.name;
-    this._profileSubtitle.textContent = userInfo.job;
+    //this._profileSubtitle.textContent = userInfo.job;
+    //30.04.2023
+    this._profileSubtitle.textContent = userInfo.about;
   }
 }

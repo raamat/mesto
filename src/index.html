@@ -13,13 +13,15 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/jacques-yves-cousteau.jpg')%>" alt="Жак-Ив Кусто">
+        <button class="profile__avatar-button " type="button" aria-label="Редактировать аватар">
+          <img class="profile__avatar opacity" src="<%=require('./images/spinner.gif')%>" alt="Аватар">
+        </button>
         <div class="profile__info">
           <div class="profile__title-block">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button opacity" type="button" aria-label="Закрыть"></button>
           </div>    
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle"></p>
         </div>
         <button class="profile__add-button opacity" type="button"></button>
       </section>
@@ -32,6 +34,17 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer> 
+  </div>
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container">
+      <button class="popup__close-button opacity" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form_type_avatar-profile" name="popup-form-edit-avatar-profile" novalidate autocomplete="off">
+          <input id="input-link-avatar" class="popup__input popup__input_type_link_avatar" type="url" placeholder="Ссылка на аватар" name="link" required>
+          <span class="link-input-error popup__input-error">Вставьте ссылку на аватар</span>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+    </div>
   </div>
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">

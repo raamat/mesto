@@ -1,0 +1,8 @@
+.profile__avatar-button {
+  background-color: #000;
+  border: none;
+  cursor: pointer;
+  background-image: url(/src/images/edit-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

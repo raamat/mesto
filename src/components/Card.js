@@ -84,7 +84,7 @@ class Card {
       this._handleCardClick(this._link, this._name);
     })
    
-    // Удаление карточки
+    // Слушатель удаления карточки
     this._element.querySelector('.card__delete-button').addEventListener('click', this._handleDelete);
 
     // Слушатель лайков
