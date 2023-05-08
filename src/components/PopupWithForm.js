@@ -23,6 +23,13 @@ export default class PopupWithForm extends Popup {
     // NodeList также можно конвертировать в Array при помощи Array.from()
     // https://developer.mozilla.org/ru/docs/Web/API/NodeList
     this._popupInputList = this._popup.querySelectorAll('.popup__input');
+    this._submitButton = this._popup.querySelector('.popup__submit-button');
+    this._prevButtonText = this._submitButton.textContent;
+  }
+
+  // Метод изменения текста кнопки при загрузке
+  setLoading(is) {
+    this._submitButton.textContent = is ? 'Сохранение...' : this._prevButtonText;
   }
   
   // Метод собирает данные всех полей формы

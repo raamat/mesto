@@ -8,6 +8,7 @@ export const popupInputJob = document.querySelector('.popup__input_type_job');
 export const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const formAddCard = document.querySelector('.popup__form_type_add-card');
+export const popupDeleteCard = document.querySelector('.popup__form_type_delete-card');
 
 //Объект с конфигом валидации
 export const validationConfig = {

@@ -13,8 +13,8 @@
     </header>
     <main class="content">
       <section class="profile">
-        <button class="profile__avatar-button " type="button" aria-label="Редактировать аватар">
-          <img class="profile__avatar opacity" src="<%=require('./images/spinner.gif')%>" alt="Аватар">
+        <button class="profile__avatar-button" type="button" aria-label="Редактировать аватар">
+          <img class="profile__avatar" src="<%=require('./images/spinner.gif')%>" alt="Аватар">
         </button>
         <div class="profile__info">
           <div class="profile__title-block">
@@ -41,7 +41,7 @@
       <h2 class="popup__title">Обновить аватар</h2>
         <form class="popup__form popup__form_type_avatar-profile" name="popup-form-edit-avatar-profile" novalidate autocomplete="off">
           <input id="input-link-avatar" class="popup__input popup__input_type_link_avatar" type="url" placeholder="Ссылка на аватар" name="link" required>
-          <span class="link-input-error popup__input-error">Вставьте ссылку на аватар</span>
+          <span class="input-link-avatar-error popup__input-error">Вставьте ссылку на аватар</span>
           <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
     </div>
@@ -79,18 +79,27 @@
       <figcaption class="popup__photo-caption"></figcaption>
     </figure>
   </div>
+  <div class="popup popup_type_delete-card">
+    <div class="popup__container">
+      <button class="popup__close-button opacity" type="button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form popup__form_type_delete-card" name="popup-form-delete-card" novalidate autocomplete="off">
+          <button class="popup__submit-button" type="submit">Да</button>
+        </form>
+    </div>
+  </div>
   <template id="card-template">
     <li class="card">
       <img class="card__photo" src="#" alt="">
       <div class="card__caption">
         <h2 class="card__title"></h2>
         <button class="card__delete-button opacity" type="button"></button>
-        <button class="card__like-button" type="button"></button>
+        <div class="card__like-container">
+          <button class="card__like-button" type="button"></button>
+          <p class="card__like-count">0</p>
+        </div>
       </div>
     </li>
   </template>
-  <!--
-  <script type="module" src="pages/index.js"></script>
-  -->
 </body>
 </html>
