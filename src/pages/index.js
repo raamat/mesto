@@ -104,8 +104,6 @@ function handleFormEditAvatarSubmit() {
 profileEditAvatarButton.addEventListener('click', handleProfileAvatarButtonClick)
 
 function handleProfileAvatarButtonClick() {
-  // Очищаем поля ввода от ошибок
-  //formAvatarValidation.clearInputsErrors();
   // Открываем попап
   showPopupAvatar.open();
 }
@@ -155,8 +153,6 @@ function handleProfileEditButtonClick() {
  */
 function handleFormAddCardSubmit({ link, place }) {
   showPopupCard.setLoading(true);
-  //cardsList.addItem(createCard({ name: place, link }), true);
-  //01.05.2023
   api.setCardServer({ name: place, link })
     // После того как карточка удачно улетит на сервер (status 200),
     // публикуем карточку в DOM, чтобы она отображалась без перезагрузки страницы

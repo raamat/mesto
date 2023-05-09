@@ -1,5 +1,3 @@
-//import { profileSubtitle } from "../utils/constants";
-
 /* Создайте класс UserInfo
 Класс UserInfo отвечает за управление отображением информации о пользователе на странице. 
 Этот класс:

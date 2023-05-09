@@ -66,11 +66,3 @@ export default class PopupWithForm extends Popup {
     this._popupForm.reset();
   }
 }
-
-/***********************Справочная информация************************/
-  //Если наше событие находится в переменной event, то для предотвращения поведения по умолчанию (отправлять данные самостоятельно) 
-  //мы можем вызвать event.preventDefault() https://doka.guide/js/deal-with-forms
-  //event.preventDefault();
-
-  // Событие submit возникает, когда пользователь отправляет ВАЛИДНУЮ форму https://doka.guide/js/event-submit
-  //formEditProfile.addEventListener('submit', handleFormEditSubmit);

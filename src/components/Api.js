@@ -1,8 +1,5 @@
 export default class Api {
   constructor(options) {
-    // тело конструктора
-    //this._baseUrl = options.baseUrl;
-    //this._headers = options.headers;
     this._options = options;
   }
   
@@ -19,24 +16,22 @@ export default class Api {
 
   // Если все ОК, метод вернет промис. При ошибке вернется статус ошибки
   _checkErr(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   }
 
-    // Получаем ссылку на аватар
+  // Получаем ссылку на аватар
   getAvatarServer() {
     return this._insertFetch('users/me').then(this._checkErr);
   }
   
   // Загрузка информации о пользователе с сервера
   getUserInfoServer() {
-    return this._insertFetch('users/me').then(this._checkErr)
+    return this._insertFetch('users/me').then(this._checkErr);
   }
 
   // Загрузка карточек с сервера
   getInitialCards() {
-    //return fetch(`${this._options.baseUrl}/cards`, this._options)
-      //.then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-    return this._insertFetch('cards').then(this._checkErr)
+    return this._insertFetch('cards').then(this._checkErr);
   }
 
    
@@ -64,7 +59,6 @@ export default class Api {
   } 
 
   // Удаление карточки
-  // Мой id "674fd725e10fa6d0cf643d39"
   deleteCardServer(cardId) {
     return this._insertFetch(`cards/${cardId}`, 'DELETE')
     .then(this._checkErr)  
@@ -84,11 +78,4 @@ export default class Api {
     return this._insertFetch(`cards/likes/${cardId}`, is ? 'PUT' : 'DELETE')
     .then(this._checkErr) 
   }
-
-  // Дергалка массива карточек
-  async getListCards() {
-    const respone = await fetch(`${this._options.baseUrl}/cards`, this._options);
-    const data = await respone.json(); 
-    return data;
-    }
 }

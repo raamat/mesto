@@ -59,4 +59,3 @@ export default class Section {
     this._container.innerHTML = '';
   }
 }
-

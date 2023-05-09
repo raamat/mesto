@@ -16,6 +16,7 @@ export default class PopupWithConfirmation extends Popup {
   updateSubmitHandler(handleOk) {
     this._handleFormSubmit = handleOk;
   }
+
  // Перезаписываем родительский метод setEventListeners. 
   // Метод setEventListeners класса PopupWithConfirmation должен не только добавлять 
   // обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
@@ -26,6 +27,4 @@ export default class PopupWithConfirmation extends Popup {
       this._handleFormSubmit();
     }) 
   }
-}
-
-  
+}  

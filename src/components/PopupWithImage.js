@@ -18,8 +18,7 @@ export default class PopupWithImage extends Popup {
     this._popupPhotoCaption.textContent = alt;
 
     // Вызываем функцию open родительского класса Popup,
-    // котороя делает выдимым попап с картинкой
+    // которая делает выдимым попап с картинкой
     super.open();
   }
 }
-

@@ -1,19 +1,11 @@
 class Card {
-  /* Подготовка класса к масштабированию 
-  (Спринт 8/14 → Тема 3/8: ООП в интерфейсах → Урок 4/8)
-  (Дополнительный вебинар по ООП - Вячевлав Гуськов)
-  1) передаем данные в конструктор в виде объекта
-  2) делаем селектор частью конструктора класса - класс станет универсальным: 
-  он научится создавать карточки в разных стилях в зависимости от модификатора */
   constructor({ data, handleCardClick, handleLikeClick, handleDeleteIconClick, userId }, cardTemplateSelector) {
-    // Достаем из объекта link и name и сохраняем в отдельные переменные
     this._data = data;
-        
-    this._cardTemplateSelector = cardTemplateSelector; // записали селектор в приватное поле
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteIconClick = handleDeleteIconClick;
     this._userId = userId;
+    this._cardTemplateSelector = cardTemplateSelector;
   }
 
   /* Метод для получения разметки из HTML:
@@ -41,15 +33,21 @@ class Card {
     this._cardPhoto.alt = this._data.name;
     this._element.querySelector('.card__title').textContent = this._data.name;
   }
-
+  
+  // Метод скрывает значок корзины на чужих карточках
   _setRemove(is) {
     this._element.querySelector('.card__delete-button').style.display = is ? 'block' : 'none';
   }
+  
+  // У каждой карточки есть массив likes из которого можно получить id пользователей
+  // поставивших лайк картоке. 
+  // Метод _searchLikes проверяет, есть ли в массиве наш лайк и возращает true или false
   _searchLikes() {
     return (
       this._data.likes.find((like) => like._id === this._userId) !== undefined
     );
   }
+
   // Функция-обработчик переключение состояния кнопки "Лайк"
   setLike(is) {
     is
@@ -57,10 +55,11 @@ class Card {
     : this._likeButton.classList.remove('card__like-button_active');
     this._isLiked = is;
   }
-    // Функция-обработчик переключение состояния кнопки "Лайк"
-    setLikeCount(count) {
-      this._element.querySelector('.card__like-count').textContent = count;
-    }
+
+  // Функция-обработчик переключение состояния кнопки "Лайк"
+  setLikeCount(count) {
+    this._element.querySelector('.card__like-count').textContent = count;
+  }
 
   /* Публичный метод вставит данные в разметку и подготовит карточку к публикации
   (вернет карточку с заполнеными данными)
@@ -82,10 +81,13 @@ class Card {
     // Добавляем вызов _setEventListeners, чтобы метод создал карточки уже со всеми обработчиками
     this._setEventListeners();
 
-    // Скрываем корзину у чужих карточек
-    this._setRemove (this._userId === this._data.owner._id);
-    this.setLike (this._searchLikes());
+    // Скрываем корзину у чужой карточки
+    this._setRemove(this._userId === this._data.owner._id);
 
+    // Устнавливаем необходимый вид кнопки "Лайк"
+    this.setLike(this._searchLikes());
+
+    // Подсчитываем и выводим кол-во лайков
     this.setLikeCount(this._data.likes.length);
 
     //Возвращаем готовую к публикации карточку
@@ -101,7 +103,6 @@ class Card {
   }
 
   
-  
   /***************** Все слушатели в одном месте *****************/
   _setEventListeners() {
 
@@ -111,8 +112,6 @@ class Card {
     })
    
     // Слушатель удаления карточки
-    //this._element.querySelector('.card__delete-button').addEventListener('click', this._handleDelete);
-    //06.05.2023
     this._element.querySelector('.card__delete-button').addEventListener('click', () => this._handleDeleteIconClick(this._data._id));
 
     // Слушатель лайков
